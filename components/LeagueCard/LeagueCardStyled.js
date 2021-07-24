@@ -28,6 +28,12 @@ export default styled.div`
     }
   }
 
+  .no-picks {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+  }
+
   @media (max-width: 500px) {
     flex-direction: column;
 
