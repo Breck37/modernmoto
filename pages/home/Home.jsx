@@ -26,7 +26,7 @@ const Home = () => {
       return null;
     }
 
-    if (user && user?.email && !userWithPicks) {
+    if (user && user?.email && !userWithPicks && !isLoading) {
       axios
         .get(
           `${apiRequests.getUser}/${user?.email}?type=${currentWeekWithLiveResults.type}`
@@ -50,20 +50,23 @@ const Home = () => {
 
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
-      const roundToShow = userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
-        currentWeekWithLiveResults.type
-      ][`week${currentWeekWithLiveResults.leagueRoundToShow}`];
+      const roundToShow =
+        userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
+          currentWeekWithLiveResults.type
+        ][`week${currentWeekWithLiveResults.leagueRoundToShow}`];
 
-      if(!roundToShow) {
-        return userWithPicks.picks.filter(pick => pick.type === currentWeekWithLiveResults.type).sort((a, b) => b.week - a.week)[1];
+      if (!roundToShow) {
+        return userWithPicks.picks
+          .filter((pick) => pick.type === currentWeekWithLiveResults.type)
+          .sort((a, b) => b.week - a.week)[0];
       }
 
-      return roundToShow.find(pick => pick.email === userWithPicks.email);
+      return roundToShow.find((pick) => pick.email === userWithPicks.email);
     }
 
     return null;
   }, [userWithPicks]);
-  console.log({ currentWeekWithLiveResults })
+
   const assignPoints = () => {
     axios
       .post(
@@ -76,9 +79,6 @@ const Home = () => {
       )
       .then((res) => {
         console.log('ASSIGN POINTS RESPONSE', { res });
-        // if (res.data.success) {
-        //   setAssignedPoints(res.data);
-        // }
       })
       .catch((e) => console.warn('ERROR', { e }));
   };
@@ -97,41 +97,49 @@ const Home = () => {
     return <CircularProgress />;
   }
 
+  const {
+    liveResults,
+    pdfResults,
+    week,
+    year,
+    type,
+    leagueRoundToShow,
+    message,
+  } = currentWeekWithLiveResults;
+
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
-      currentWeekWithLiveResults.raceResults ? (
+      pdfResults &&
+      pdfResults.raceResults ? (
         <ModernButton label="Assign Points" onClick={assignPoints} />
       ) : null}
-      {lastRoundDetails && <div className="user-details">
-        <h1>{`Current Round: ${currentWeekWithLiveResults.week}`}</h1>
-        <h2>{`Season: ${currentWeekWithLiveResults.year}`}</h2>
-        <h2>{`${
-          lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
-        }  Round ${lastRoundDetails.week} Score: ${lastRoundDetails.totalPoints}`}</h2>
-        <h2>{`${
-          lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
-        } Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
-      </div>}
+      {lastRoundDetails && (
+        <div className="user-details">
+          <h1>{`Current Round: ${week}`}</h1>
+          <h2>{`Season: ${year}`}</h2>
+          <h2>{`${
+            lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
+          }  Round ${lastRoundDetails.week} Score: ${
+            lastRoundDetails.totalPoints
+          }`}</h2>
+          <h2>{`${
+            lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
+          } Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
+        </div>
+      )}
       <LeagueCard
         leaguePicks={
-          userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
-            currentWeekWithLiveResults.type
-          ][`week${currentWeekWithLiveResults.leagueRoundToShow}`]
+          userWithPicks.leaguePicks[year][type][`week${leagueRoundToShow}`]
         }
       />
-      {!currentWeekWithLiveResults.message &&
-      currentWeekWithLiveResults &&
-      currentWeekWithLiveResults?.fastestLaps.length > 0 ? (
+      {!message && liveResults.fastestLaps.length > 0 ? (
         <>
           {/* <div className="marquee">
             <div className="animation-container">
               <span>FAST LAPS</span>
-              {currentWeekWithLiveResults.fastestLaps.map(
+              {liveResults.fastestLaps.map(
                 ({ riderName, bestLap, bike }, index) => {
-                  console.log({
-                    riderName, bestLap
-                  })
                   return (
                     <div
                       key={`${riderName}-fast-lap`}
@@ -152,7 +160,7 @@ const Home = () => {
           </div> */}
           <div className="mobile-fast-laps">
             <h3>Top 3 LapTimes</h3>
-            {currentWeekWithLiveResults.fastestLaps
+            {liveResults.fastestLaps
               .slice(0, 3)
               .map(({ riderName, bestLap, bike }, index) => {
                 return (
@@ -160,11 +168,13 @@ const Home = () => {
                     key={`${riderName}-fast-lap`}
                     className={`fast-lap ${index}`}
                   >
-                    <img
-                      src={manufacturers[bike.toLowerCase()].image}
-                      alt=""
-                      className="rider-image"
-                    />
+                    {bike && (
+                      <img
+                        src={manufacturers[bike.toLowerCase()].image}
+                        alt=""
+                        className="rider-image"
+                      />
+                    )}
                     <div>{riderName}</div>
                     <div>{bestLap}</div>
                   </div>
@@ -173,7 +183,7 @@ const Home = () => {
           </div>
         </>
       ) : (
-        <div className="user-details">{currentWeekWithLiveResults.message}</div>
+        <div className="user-details">{message}</div>
       )}
       <main>
         <h1 className="title"></h1>

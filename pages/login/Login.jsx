@@ -49,17 +49,18 @@ const Login = () => {
     ).auth.loginWithMagicLink({ email: elements.email.value });
 
     // Once we have the token from magic,
-    const authRequest = await axios.post(
-      '/api/login', 
-      null, 
-      { headers: { Authorization: `Bearer ${did}` }}
-    ).then(response => response);
+    const authRequest = await axios
+      .post('/api/login', null, { headers: { Authorization: `Bearer ${did}` } })
+      .then((response) => response);
 
-    if (authRequest.statusText.toLowerCase() === 'ok' || authRequest.status === 200) {
-      router.push('/home')
+    if (
+      authRequest.statusText.toLowerCase() === 'ok' ||
+      authRequest.status === 200
+    ) {
+      router.push('/home');
     } else {
       /* handle errors */
-      console.log('User Does not have access!', { authRequest, currentUser })
+      console.log('User Does not have access!', { authRequest, currentUser });
     }
   };
 
@@ -95,7 +96,11 @@ const Login = () => {
         <div className="tagline">
           <i>The</i> MX fantasy app
         </div>
-        <Modal size="normal" isOpen={isEmailModalOpen} onClose={setIsEmailModalOpen}>
+        <Modal
+          size="normal"
+          isOpen={isEmailModalOpen}
+          onClose={setIsEmailModalOpen}
+        >
           <form className="login-modal-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">Enter Email</label>
