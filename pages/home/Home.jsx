@@ -109,7 +109,9 @@ const Home = () => {
 
   return (
     <HomeStyled currentMode={currentMode}>
-      {user.email === process.env.ADMIN_USER && pdfResults.raceResults ? (
+      {user.email === process.env.ADMIN_USER &&
+      pdfResults &&
+      pdfResults.raceResults ? (
         <ModernButton label="Assign Points" onClick={assignPoints} />
       ) : null}
       {lastRoundDetails && (
