@@ -58,11 +58,14 @@ const createRiderResults = (array) => {
     }, {});
 
   const sortedRiders = riders
-    .map((rider) => ({
-      riderName: rider.name,
-      bestLap: rider.min.replace(/([.:])/g, ''),
-      actualLap: rider.min,
-    }))
+    .filter((r) => Boolean(r.min && r.name))
+    .map((rider) => {
+      return {
+        riderName: rider.name,
+        bestLap: rider.min.replace(/([.:])/g, ''),
+        actualLap: rider.min,
+      };
+    })
     .sort((a, b) => a.bestLap - b.bestLap)
     .slice(0, 10);
 
