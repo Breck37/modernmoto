@@ -46,10 +46,9 @@ export default async (req, res) => {
 
     await Promise.all([
       crawler(currentWeek.entryList),
-      crawler(currentWeek.smallBikeEntryList)
+      crawler(currentWeek.smallBikeEntryList),
     ]).then((response) => {
       let riders = {};
-      console.log({ response })
       if (!Array.isArray(response) || !response.length) {
         return res.status(200).send({
           data: response.error,
@@ -60,14 +59,14 @@ export default async (req, res) => {
         const formattedResponse = response[0].text.split('\n');
 
         riders.bigBike = riderMapper(
-          collectEntryListData(spliceEntryList(formattedResponse)),
+          collectEntryListData(spliceEntryList(formattedResponse))
         );
       }
       if (response[1] && !response[1].error) {
         const formattedResponse = response[1].text.split('\n');
 
         riders.smallBike = riderMapper(
-          collectEntryListData(spliceEntryList(formattedResponse)),
+          collectEntryListData(spliceEntryList(formattedResponse))
         );
       }
 
@@ -75,7 +74,6 @@ export default async (req, res) => {
         riders,
         success: true,
       });
-
     });
   } catch (error) {
     res.status(404).send('Entry list not yet available.');

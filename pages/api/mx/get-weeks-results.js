@@ -70,7 +70,6 @@ export const getFastestLapResults = async (roundLinks) => {
     const splitBigBikeLapTimesMoto2 = bigBikeLapTimesMoto2?.split('\n');
     const splitSmallBikeLapTimesMoto1 = smallBikeLapTimesMoto1?.split('\n');
     const splitSmallBikeLapTimesMoto2 = smallBikeLapTimesMoto2?.split('\n');
-    // console.log({ smallBikeLapTimesMoto2 });
 
     const errors = checkErrors(response);
     if (errors.hasError) {
