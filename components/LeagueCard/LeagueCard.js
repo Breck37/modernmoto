@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import LeagueCardStyled from './LeagueCardStyled';
 
-const LeagueCard = ({ leaguePicks }) => {
+const LeagueCard = ({ leaguePicks = [] }) => {
+  const hasLeaguePicks = useMemo(() => {
+    return Boolean(leaguePicks && leaguePicks.length);
+  }, [leaguePicks]);
+
   const renderPoints = (label, pickPoints) => {
     if (!pickPoints) return null;
 
@@ -11,6 +15,15 @@ const LeagueCard = ({ leaguePicks }) => {
       </h4>
     );
   };
+
+  if (!hasLeaguePicks) {
+    return (
+      <LeagueCardStyled>
+        <div className="no-picks">No picks were made last week</div>
+      </LeagueCardStyled>
+    );
+  }
+
   return (
     <LeagueCardStyled>
       {leaguePicks.map((pick) => {
