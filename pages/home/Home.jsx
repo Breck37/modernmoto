@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
-import { useCurrentMode, useAuth } from '../../hooks';
-import { useRaceResults } from '../../hooks/raceResults';
-import { NoAccess, LeagueCard } from '../../components';
-import { HomeStyled } from '../../styles';
-import { manufacturers, apiType } from '../../constants';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
+import { LeagueCard, NoAccess } from '../../components';
 import ModernButton from '../../components/Button/Button';
+import { apiType, manufacturers } from '../../constants';
+import { useAuth, useCurrentMode } from '../../hooks';
+import { useRaceResults } from '../../hooks/raceResults';
+import { HomeStyled } from '../../styles';
 
 const Home = () => {
   const router = useRouter();

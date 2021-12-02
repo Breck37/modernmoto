@@ -25,14 +25,10 @@ import { TeamStyled } from '../../styles';
 // TODO create league select
 
 const WeeklyPicksController = ({ isActive, children }) => {
-  if(!isActive) return null;
+  if (!isActive) return null;
 
-  return (
-    <>
-      {children}
-    </>
-  )
-}
+  return <>{children}</>;
+};
 
 const Team = () => {
   // hooks
@@ -101,61 +97,77 @@ const Team = () => {
   const selectedBigBikeRiders = useMemo(() => {
     if (!selectedRiders || !selectedRiders.big) return null;
     const riderNames = [];
-    return selectedRiders.big.map((rider) => {
-      const indexOfRiderName = riderNames.indexOf(rider.riderName);
-      if (rider.position === 100 || indexOfRiderName === -1) {
-        riderNames.push(rider.riderName);
-        return { ...rider, error: '' };
-      }
-      return {
-        ...rider,
-        error: `Please change pick #${indexOfRiderName + 1}`,
-      };
-    }).sort((a, b) => a.position - b.position);
-  }, [selectedRiders])
+    return selectedRiders.big
+      .map((rider) => {
+        const indexOfRiderName = riderNames.indexOf(rider.riderName);
+        if (
+          rider.position === 100 ||
+          rider.position === 101 ||
+          rider.position === 102 ||
+          indexOfRiderName === -1
+        ) {
+          riderNames.push(rider.riderName);
+          return { ...rider, error: '' };
+        }
+        return {
+          ...rider,
+          error: `Please change pick #${indexOfRiderName + 1}`,
+        };
+      })
+      .sort((a, b) => a.position - b.position);
+  }, [selectedRiders]);
 
   const selectedSmallBikeRiders = useMemo(() => {
     if (!selectedRiders || !selectedRiders.small) return null;
     const riderNames = [];
-    return selectedRiders.small.map((rider) => {
-      const indexOfRiderName = riderNames.indexOf(rider.riderName);
-      if (rider.position === 100 || indexOfRiderName === -1) {
-        riderNames.push(rider.riderName);
-        return { ...rider, error: '' };
-      }
-      return {
-        ...rider,
-        error: `Please change pick #${indexOfRiderName + 1}`,
-      };
-    }).sort((a, b) => a.position - b.position);
-  }, [selectedRiders])
+    return selectedRiders.small
+      .map((rider) => {
+        const indexOfRiderName = riderNames.indexOf(rider.riderName);
+        if (
+          rider.position === 100 ||
+          rider.position === 101 ||
+          rider.position === 102 ||
+          indexOfRiderName === -1
+        ) {
+          riderNames.push(rider.riderName);
+          return { ...rider, error: '' };
+        }
+        return {
+          ...rider,
+          error: `Please change pick #${indexOfRiderName + 1}`,
+        };
+      })
+      .sort((a, b) => a.position - b.position);
+  }, [selectedRiders]);
 
   const isDisabled = useMemo(() => {
     const classTeamIsSet = currentRound.type === 'sx' ? 7 : 8;
-    return selectedBigBikeRiders?.length !== classTeamIsSet && selectedSmallBikeRiders?.length !== classTeamIsSet;
+    return (
+      selectedBigBikeRiders?.length !== classTeamIsSet &&
+      selectedSmallBikeRiders?.length !== classTeamIsSet
+    );
   }, [selectedSmallBikeRiders, selectedBigBikeRiders]);
 
   const qualifyingContent = useMemo(() => {
     const classSize = currentTab === 0 ? '250' : '450';
-    if(!canShowQualifying) {
+    if (!canShowQualifying) {
       return {
         label: `${classSize} Qualifying Not yet Completed`,
-        link: ''
-      }
+        link: '',
+      };
     }
-    switch(currentTab) {
+    switch (currentTab) {
       case 1:
         return {
           label: `${classSize} Qualfying Results`,
           link: currentRound.bigBikeQualifying,
-        }
+        };
       case 0:
       default:
         return {
           label: `${classSize} Qualfying Results`,
           link: currentRound.smallBikeQualifying,
-        }
-      
+        };
     }
   }, [currentTab, canShowQualifying]);
 
@@ -193,8 +205,8 @@ const Team = () => {
   };
 
   const handleTabChange = (event, newValue) => {
-    setCurrentTab(newValue)
-  }
+    setCurrentTab(newValue);
+  };
 
   if (loading || userLoading) {
     return <CircularProgress />;
@@ -216,12 +228,16 @@ const Team = () => {
 
   return (
     <TeamStyled currentMode={currentMode}>
-        <Paper square>
-          <Tabs onChange={handleTabChange} value={currentTab} indicatorColor="primary">
-            <Tab label="250" />
-            <Tab label="450" />
-          </Tabs>
-        </Paper>
+      <Paper square>
+        <Tabs
+          onChange={handleTabChange}
+          value={currentTab}
+          indicatorColor="primary"
+        >
+          <Tab label="250" />
+          <Tab label="450" />
+        </Tabs>
+      </Paper>
       <div className="team-container">
         <div className="select-container">
           {currentUser &&
@@ -229,32 +245,32 @@ const Team = () => {
           currentUser.leagues.length ? (
             <>
               <FormControl>
-              <InputLabel id="League">League:</InputLabel>
-              <Select
-                labelId="League"
-                name="League"
-                label="League:"
-                id="league-select"
-                value={league || ''}
-                onChange={(evt) => {
-                  setLeague(evt.target.value);
-                }}
-                className="roboto"
-              >
-                {currentUser.leagues.map((leagueToPick) => {
-                  return (
-                    <MenuItem
-                      key={leagueToPick}
-                      // style={getStyles(leagueToPick, riderName, theme)}
-                      value={leagueToPick}
-                      className="roboto"
-                      disabled={league === leagueToPick}
-                    >
-                      {`${leagueToPick}`}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+                <InputLabel id="League">League:</InputLabel>
+                <Select
+                  labelId="League"
+                  name="League"
+                  label="League:"
+                  id="league-select"
+                  value={league || ''}
+                  onChange={(evt) => {
+                    setLeague(evt.target.value);
+                  }}
+                  className="roboto"
+                >
+                  {currentUser.leagues.map((leagueToPick) => {
+                    return (
+                      <MenuItem
+                        key={leagueToPick}
+                        // style={getStyles(leagueToPick, riderName, theme)}
+                        value={leagueToPick}
+                        className="roboto"
+                        disabled={league === leagueToPick}
+                      >
+                        {`${leagueToPick}`}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
               </FormControl>
               <div className="button-container">
                 <Button
@@ -287,27 +303,27 @@ const Team = () => {
             <h3>{qualifyingContent.label}</h3>
           )}
         </div>
-        <WeeklyPicksController isActive={currentTab == 0} >
+        <WeeklyPicksController isActive={currentTab == 0}>
           <WeeklyPicks
-              classType="small"
-              riders={entries.smallBike}
-              selectedRiders={{
-                big: selectedBigBikeRiders,
-                small: selectedSmallBikeRiders,
-              }}
-              setSelectedRiders={setSelectedRiders}
-            />
+            classType="small"
+            riders={entries.smallBike}
+            selectedRiders={{
+              big: selectedBigBikeRiders,
+              small: selectedSmallBikeRiders,
+            }}
+            setSelectedRiders={setSelectedRiders}
+          />
         </WeeklyPicksController>
-        <WeeklyPicksController isActive={currentTab == 1} >
+        <WeeklyPicksController isActive={currentTab == 1}>
           <WeeklyPicks
-              classType="big"
-              riders={entries.bigBike}
-              selectedRiders={{
-                big: selectedBigBikeRiders,
-                small: selectedSmallBikeRiders,
-              }}
-              setSelectedRiders={setSelectedRiders}
-            />
+            classType="big"
+            riders={entries.bigBike}
+            selectedRiders={{
+              big: selectedBigBikeRiders,
+              small: selectedSmallBikeRiders,
+            }}
+            setSelectedRiders={setSelectedRiders}
+          />
         </WeeklyPicksController>
       </div>
     </TeamStyled>
