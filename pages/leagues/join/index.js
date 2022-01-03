@@ -1,3 +1,3 @@
-import { JoinLeague as Join } from "./JoinLeague";
+import JoinLeague from "./JoinLeague";
 
-export default Join;
+export default JoinLeague;

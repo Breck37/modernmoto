@@ -1,9 +1,11 @@
 import React from "react";
 
-export const JoinLeague = () => {
+const JoinLeague = () => {
   return <Presentation />;
 };
 
 const Presentation = () => {
   return <div>JoinLeague</div>;
 };
+
+export default JoinLeague;
