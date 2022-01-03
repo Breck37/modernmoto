@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
-import { useCurrentMode, useAuth } from '../../hooks';
-import { useRaceResults } from '../../hooks/raceResults';
-import { NoAccess, LeagueCard } from '../../components';
-import { HomeStyled } from '../../styles';
-import { manufacturers, apiType } from '../../constants';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
+import { LeagueCard, NoAccess } from '../../components';
 import ModernButton from '../../components/Button/Button';
+import { apiType, manufacturers } from '../../constants';
+import { useAuth, useCurrentMode } from '../../hooks';
+import { useRaceResults } from '../../hooks/raceResults';
+import { HomeStyled } from '../../styles';
 
 const Home = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const Home = () => {
   const [userWithPicks, setUserWithPicks] = useState(null);
   const [userWithNoAccess, setUserWithNoSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const apiRequests = apiType[currentWeekWithLiveResults.type];
+  const apiRequests = apiType[currentWeekWithLiveResults?.type];
 
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
@@ -29,7 +29,7 @@ const Home = () => {
     if (user && user?.email && !userWithPicks && !isLoading) {
       axios
         .get(
-          `${apiRequests.getUser}/${user?.email}?type=${currentWeekWithLiveResults.type}`
+          `${apiRequests.getUser}/${user?.email}?type=${currentWeekWithLiveResults?.type}`
         )
         .then(({ data: userData }) => {
           setTimeout(() => {
@@ -51,13 +51,13 @@ const Home = () => {
   const lastRoundDetails = useMemo(() => {
     if (userWithPicks && userWithPicks.picks.length) {
       const roundToShow =
-        userWithPicks.leaguePicks[currentWeekWithLiveResults.year][
-          currentWeekWithLiveResults.type
-        ][`week${currentWeekWithLiveResults.leagueRoundToShow}`];
+        userWithPicks.leaguePicks[currentWeekWithLiveResults?.year][
+          currentWeekWithLiveResults?.type
+        ][`week${currentWeekWithLiveResults?.leagueRoundToShow}`];
 
       if (!roundToShow) {
         return userWithPicks.picks
-          .filter((pick) => pick.type === currentWeekWithLiveResults.type)
+          .filter((pick) => pick.type === currentWeekWithLiveResults?.type)
           .sort((a, b) => b.week - a.week)[0];
       }
 
@@ -70,10 +70,10 @@ const Home = () => {
   const assignPoints = () => {
     axios
       .post(
-        `${apiRequests.assignPoints}?week=${currentWeekWithLiveResults.week}&type=${currentWeekWithLiveResults.type}&year=${currentWeekWithLiveResults.year}`,
+        `${apiRequests.assignPoints}?week=${currentWeekWithLiveResults?.week}&type=${currentWeekWithLiveResults?.type}&year=${currentWeekWithLiveResults?.year}`,
         {
           raceResults: {
-            ...currentWeekWithLiveResults.pdfResults,
+            ...currentWeekWithLiveResults?.pdfResults,
           },
         }
       )
