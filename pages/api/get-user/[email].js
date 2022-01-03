@@ -4,6 +4,7 @@ export default (req, res) => {
   const { email, week, type } = req.query;
   if (!email) {
     res.status(200).send({ success: false, error: 'No email provided' });
+    return;
   }
 
   let queryString = `?email=${email}`;
