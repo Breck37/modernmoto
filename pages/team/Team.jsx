@@ -1,26 +1,26 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import axios from 'axios';
-import Link from 'next/link';
-import { Alert } from '@material-ui/lab';
 import {
   CircularProgress,
-  Select,
-  MenuItem,
-  InputLabel,
-  Tabs,
-  Tab,
-  Paper,
   FormControl,
-} from '@material-ui/core';
-import { Button, WeeklyPicks } from '../../components';
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Tab,
+  Tabs,
+} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import axios from "axios";
+import Link from "next/link";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Button, WeeklyPicks } from "../../components";
 import {
-  useIsMountedRef,
-  useCurrentUser,
-  useCurrentRound,
-  useCurrentMode,
   useAuth,
-} from '../../hooks';
-import { TeamStyled } from '../../styles';
+  useCurrentMode,
+  useCurrentRound,
+  useCurrentUser,
+  useIsMountedRef,
+} from "../../hooks";
+import { TeamStyled } from "../../styles";
 
 // TODO create league select
 
@@ -39,41 +39,34 @@ const Team = () => {
   const { currentUser } = useCurrentUser(user);
 
   // state
-  const [league, setLeague] = useState('');
+  const [league, setLeague] = useState("");
   const [selectedRiders, setSelectedRiders] = useState();
   const [entries, setEntries] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const [loading, setLoading] = useState(true);
   const [canShowQualifying, setCanShowQualifying] = useState(false);
-  const [success, setSuccess] = useState('');
-
-  const picksUnavailable =
-    currentRound.submissionEnd < new Date() ||
-    currentRound.submissionStart > new Date();
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     if (success) {
-      setTimeout(() => setSuccess(''), 1500);
+      setTimeout(() => setSuccess(""), 1500);
     }
     if (!isMounted.current) return;
     if (entries && Object.keys(entries).length) return;
 
-    if (picksUnavailable) {
-      setLoading(false);
-      return;
-    }
-
     axios
-      .get(`/api/check-entry-list?round=${currentRound.round}`)
+      .get(
+        `/api/check-entry-list?round=${currentRound.round}&year=${currentRound.year}&type=${currentRound.type}`
+      )
       .then((res) => {
         setLoading(false);
         setEntries(res.data.riders);
       })
-      .catch((err) => console.error('ENTRY ERROR', err));
+      .catch((err) => console.error("ENTRY ERROR", err));
   }, [success, entries]);
 
   const qualifyingCanBeShown = useCallback(async (url) => {
-    return await fetch(url, { method: 'get' }).then(function (status) {
+    return await fetch(url, { method: "get" }).then(function (status) {
       return status.ok;
     });
   });
@@ -84,16 +77,14 @@ const Team = () => {
         const result = await qualifyingCanBeShown(
           currentRound.bigBikeQualifying
         );
-
         if (result) {
           setCanShowQualifying(true);
         }
       } catch (e) {
-        console.log('Error getting qualifying results', e);
+        console.log("Error getting qualifying results", e);
       }
     }
   }, [canShowQualifying, loading, currentRound]);
-
   const selectedBigBikeRiders = useMemo(() => {
     if (!selectedRiders || !selectedRiders.big) return null;
     const riderNames = [];
@@ -107,7 +98,7 @@ const Team = () => {
           indexOfRiderName === -1
         ) {
           riderNames.push(rider.riderName);
-          return { ...rider, error: '' };
+          return { ...rider, error: "" };
         }
         return {
           ...rider,
@@ -130,7 +121,7 @@ const Team = () => {
           indexOfRiderName === -1
         ) {
           riderNames.push(rider.riderName);
-          return { ...rider, error: '' };
+          return { ...rider, error: "" };
         }
         return {
           ...rider,
@@ -141,7 +132,7 @@ const Team = () => {
   }, [selectedRiders]);
 
   const isDisabled = useMemo(() => {
-    const classTeamIsSet = currentRound.type === 'sx' ? 7 : 8;
+    const classTeamIsSet = currentRound.type === "sx" ? 7 : 8;
     return (
       selectedBigBikeRiders?.length !== classTeamIsSet &&
       selectedSmallBikeRiders?.length !== classTeamIsSet
@@ -149,11 +140,11 @@ const Team = () => {
   }, [selectedSmallBikeRiders, selectedBigBikeRiders]);
 
   const qualifyingContent = useMemo(() => {
-    const classSize = currentTab === 0 ? '250' : '450';
+    const classSize = currentTab === 0 ? "250" : "450";
     if (!canShowQualifying) {
       return {
         label: `${classSize} Qualifying Not yet Completed`,
-        link: '',
+        link: "",
       };
     }
     switch (currentTab) {
@@ -172,13 +163,12 @@ const Team = () => {
   }, [currentTab, canShowQualifying]);
 
   const removeErrors = (riders) => {
+    if (!riders?.length) return [];
     return riders.map(({ error, ...rest }) => ({ ...rest }));
   };
-
   const saveUserPicks = () => {
     const cleansedBigBikeSelectedRiders = removeErrors(selectedRiders.big);
     const cleansedSmallBikeSelectedRiders = removeErrors(selectedRiders.small);
-
     const params = JSON.stringify({
       week: currentRound.week,
       round: currentRound.round,
@@ -187,18 +177,19 @@ const Team = () => {
       bigBikePicks: cleansedBigBikeSelectedRiders,
       smallBikePicks: cleansedSmallBikeSelectedRiders,
       totalPoints: 0,
-      league: league || 'League of Extraordinary Bros',
+      league: league || "League of Extraordinary Bros",
       type: currentRound.type,
+      created_at: new Date(),
     });
 
     axios
-      .post('/api/save-picks', params, {
+      .post("/api/save-picks", params, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then(() => {
-        setSuccess('Saved picks successfully!');
+        setSuccess("Saved picks successfully!");
         setSelectedRiders([]);
       })
       .catch((err) => console.error(err));
@@ -212,19 +203,13 @@ const Team = () => {
     return <CircularProgress />;
   }
 
-  if (picksUnavailable) {
-    const beginningText =
-      currentRound.submissionStart > new Date()
-        ? 'Window to make picks is not yet open'
-        : null;
-    return (
-      <TeamStyled currentMode={currentMode}>
-        <div className="unavailable">
-          {beginningText || 'Window to make picks has closed'}
-        </div>
-      </TeamStyled>
-    );
-  }
+  // return (
+  //   <TeamStyled currentMode={currentMode}>
+  //     <div className="unavailable">
+  //       {beginningText || "Window to make picks has closed"}
+  //     </div>
+  //   </TeamStyled>
+  // );
 
   return (
     <TeamStyled currentMode={currentMode}>
@@ -251,7 +236,7 @@ const Team = () => {
                   name="League"
                   label="League:"
                   id="league-select"
-                  value={league || ''}
+                  value={league || ""}
                   onChange={(evt) => {
                     setLeague(evt.target.value);
                   }}
