@@ -179,7 +179,7 @@ const Team = () => {
       totalPoints: 0,
       league: league || "League of Extraordinary Bros",
       type: currentRound.type,
-      created_at: new Date(),
+      deadline: currentRound.deadline,
     });
 
     axios
