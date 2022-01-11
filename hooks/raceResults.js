@@ -1,28 +1,34 @@
-import React, { useContext, createContext } from 'react';
-import currentRound from '../constants/currentRound';
-import scheduledData from '../constants/scheduledData';
-const RaceResultsContext = createContext(null);
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { apiType, currentRound } from "../constants";
 
 export const useRaceResults = () => {
-  let raceResults = useContext(RaceResultsContext);
+  const apiRequests = apiType[currentRound.type];
+  const [raceResults, setRaceResults] = useState(null);
 
-  if (raceResults) {
-    raceResults = { ...raceResults, ...currentRound };
-  } else if (!raceResults && scheduledData[currentRound?.round]) {
-    raceResults = {
-      ...scheduledData[currentRound?.round],
-      message: 'Results still in progress',
-      ...currentRound,
-    };
-  }
+  const getLiveResultsFallBack = useCallback(() => {
+    axios.get(apiRequests.liveResults).then(({ data }) => {
+      setRaceResults(data);
+    });
+  }, [raceResults]);
+
+  useEffect(() => {
+    if (!raceResults) {
+      axios
+        .get(apiRequests.weekResults)
+        .then(({ data }) => {
+          setRaceResults(data);
+        })
+        .catch(() => {
+          if (!raceResults && apiRequests.liveResults) {
+            getLiveResultsFallBack();
+          }
+        });
+    }
+  }, [raceResults]);
+  console.log({ raceResults, apiRequests });
+
+  console.log("IN HOOK", { raceResults });
 
   return raceResults;
 };
-
-export default function RaceResultsContextProvider({ children, raceResults }) {
-  return (
-    <RaceResultsContext.Provider value={raceResults}>
-      {children}
-    </RaceResultsContext.Provider>
-  );
-}
