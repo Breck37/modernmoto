@@ -26,9 +26,6 @@ export const useRaceResults = () => {
         });
     }
   }, [raceResults]);
-  console.log({ raceResults, apiRequests });
-
-  console.log("IN HOOK", { raceResults });
 
   return raceResults;
 };
