@@ -1,13 +1,13 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
-import { LeagueCard, NoAccess } from '../../components';
-import ModernButton from '../../components/Button/Button';
-import { apiType, manufacturers } from '../../constants';
-import { useAuth, useCurrentMode } from '../../hooks';
-import { useRaceResults } from '../../hooks/raceResults';
-import { HomeStyled } from '../../styles';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useMemo, useState } from "react";
+import { LeagueCard, NoAccess } from "../../components";
+import ModernButton from "../../components/Button/Button";
+import { apiType, manufacturers } from "../../constants";
+import { useAuth, useCurrentMode } from "../../hooks";
+import { useRaceResults } from "../../hooks/raceResults";
+import { HomeStyled } from "../../styles";
 
 const Home = () => {
   const router = useRouter();
@@ -22,20 +22,21 @@ const Home = () => {
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       setUserWithPicks(null);
-      router.push('/login');
+      router.push("/login");
       return null;
     }
+
+    if (!currentWeekWithLiveResults) return;
 
     if (user && user?.email && !userWithPicks && !isLoading) {
       axios
         .get(
-          `${apiRequests.getUser}/${user?.email}?type=${currentWeekWithLiveResults?.type}`
+          `${apiRequests?.getUser}/${user?.email}?type=${currentWeekWithLiveResults?.type}`
         )
         .then(({ data: userData }) => {
           setTimeout(() => {
             setIsLoading(false);
           }, 200);
-
           if (userData.success) {
             setUserWithPicks(userData.user);
             return;
@@ -43,13 +44,13 @@ const Home = () => {
 
           setUserWithNoSuccess(userData);
         })
-        .catch((e) => console.log('Error getting user > Home', e));
+        .catch((e) => console.log("Error getting user > Home", e));
       return;
     }
   }, [user, userWithPicks]);
 
   const lastRoundDetails = useMemo(() => {
-    if (userWithPicks && userWithPicks.picks.length) {
+    if (userWithPicks && userWithPicks.currentRound.length) {
       const roundToShow =
         userWithPicks.leaguePicks[currentWeekWithLiveResults?.year][
           currentWeekWithLiveResults?.type
@@ -78,9 +79,9 @@ const Home = () => {
         }
       )
       .then((res) => {
-        console.log('ASSIGN POINTS RESPONSE', { res });
+        console.log("ASSIGN POINTS RESPONSE", { res });
       })
-      .catch((e) => console.warn('ERROR', { e }));
+      .catch((e) => console.warn("ERROR", { e }));
   };
 
   if (userWithNoAccess) {
@@ -102,11 +103,8 @@ const Home = () => {
     pdfResults,
     week,
     year,
-    type,
-    leagueRoundToShow,
     message,
   } = currentWeekWithLiveResults;
-
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
@@ -128,11 +126,15 @@ const Home = () => {
           } Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
         </div>
       )}
-      <LeagueCard
-        leaguePicks={
-          userWithPicks.leaguePicks[year][type][`week${leagueRoundToShow}`]
-        }
-      />
+      {userWithPicks?.leaguePicks?.length &&
+        userWithPicks.leaguePicks.map((leaguePick) => {
+          return (
+            <LeagueCard
+              key={`${Object.keys(leaguePick)[0]}`}
+              leaguePicks={leaguePick}
+            />
+          );
+        })}
       {!message && liveResults.fastestLaps.length > 0 ? (
         <>
           {/* <div className="marquee">
@@ -170,7 +172,9 @@ const Home = () => {
                   >
                     {bike && (
                       <img
-                        src={manufacturers[bike.toLowerCase()].image}
+                        src={
+                          manufacturers[bike.split(" ")[0].toLowerCase()].image
+                        }
                         alt=""
                         className="rider-image"
                       />
