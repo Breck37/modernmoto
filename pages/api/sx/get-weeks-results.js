@@ -1,16 +1,16 @@
-import crawler from 'crawler-request';
-import { currentRound, scheduledData } from '../../../constants';
+import crawler from "crawler-request";
+import { currentRound, scheduledData } from "../../../constants";
+import { lapsMapper } from "../../../helpers";
 import {
   mapper,
+  resultsMapper,
   seasonMapper,
   spliceResults,
   spliceSeasonResults,
-  resultsMapper,
-} from '../../../helpers/sx';
-import { lapsMapper } from '../../../helpers';
+} from "../../../helpers/sx";
 
 export const getLiveResults = async () =>
-  crawler('https://live.amasupercross.com/xml/sx/RaceResults.json')
+  crawler("https://live.amasupercross.com/xml/sx/RaceResults.json")
     .then((response) => {
       if (response && !response.error) {
         const formattedResponse = JSON.parse(response.html);
@@ -27,7 +27,7 @@ export const getLiveResults = async () =>
         };
       }
     })
-    .catch((e) => console.error('/get-live-results', e));
+    .catch((e) => console.error("/get-live-results", e));
 
 // const getResultDetails = (results) => {
 //   const session = results[3].split(' - ')[1];
@@ -37,25 +37,29 @@ export const getLiveResults = async () =>
 // };
 
 export default async (req, res) => {
-  const url = scheduledData[currentRound.round]?.officialResults;
+  const url =
+    scheduledData[currentRound.type][currentRound.year][currentRound.round]
+      ?.officialResults;
 
   const liveResults = await getLiveResults();
   crawler(url)
     .then((response) => {
       if (response.error) {
         res.status(200).send({
+          ...currentRound,
           ...liveResults,
           liveResults,
         });
       }
       if (response && !response.error) {
-        const formattedResponse = response.text.split('\n');
+        const formattedResponse = response.text.split("\n");
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
-          spliceSeasonResults(formattedResponse),
+          spliceSeasonResults(formattedResponse)
         );
 
         res.status(200).send({
+          ...currentRound,
           raceResults,
           seasonResults,
           session: liveResults.session,
@@ -64,5 +68,5 @@ export default async (req, res) => {
         });
       }
     })
-    .catch((e) => console.error('/get-live-results', e));
+    .catch((e) => console.error("/get-live-results", e));
 };

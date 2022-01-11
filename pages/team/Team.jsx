@@ -62,7 +62,7 @@ const Team = () => {
         setLoading(false);
         setEntries(res.data.riders);
       })
-      .catch((err) => console.error("ENTRY ERROR", err));
+      .catch((err) => console.warn("ENTRY ERROR", err));
   }, [success, entries]);
 
   const qualifyingCanBeShown = useCallback(async (url) => {
@@ -80,6 +80,8 @@ const Team = () => {
         if (result) {
           setCanShowQualifying(true);
         }
+
+        setLoading(false);
       } catch (e) {
         console.log("Error getting qualifying results", e);
       }
