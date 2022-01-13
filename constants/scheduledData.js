@@ -452,12 +452,13 @@ module.exports = {
     },
     2022: {
       s1: {
-        title: "Houston 1",
-        city: "Houston",
-        state: "TX",
+        coast: "West",
+        title: "Anaheim 1",
+        city: "Anaheim",
+        state: "CA",
         number: "05",
         year: "2021",
-        season: "S1",
+        season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2205/S1ENTRYLIST.PDF",
         smallBikeEntryList:
@@ -474,16 +475,18 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2205/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2205/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 0, 8, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s2: {
-        title: "Houston 2",
-        city: "Houston",
-        state: "TX",
+        coast: "West",
+        title: "Oakland",
+        city: "Oakland",
+        state: "CA",
         number: "10",
         year: "2021",
-        season: "S1",
+        season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2210/S1ENTRYLIST.PDF",
         smallBikeEntryList:
@@ -500,16 +503,18 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2210/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2210/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 0, 15, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s3: {
-        title: "Houston 3",
-        city: "Houston",
-        state: "TX",
+        coast: "West",
+        title: "San Diego",
+        city: "San Diego",
+        state: "CA",
         number: "15",
         year: "2021",
-        season: "S1",
+        season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2215/S1ENTRYLIST.PDF",
         smallBikeEntryList:
@@ -526,13 +531,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2215/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2215/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 0, 22, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s4: {
-        title: "Indianapolis 1",
-        city: "Indianapolis",
-        state: "IN",
+        coast: "West",
+        title: "Anaheim 2",
+        city: "Anaheim",
+        state: "CA",
         number: "20",
         year: "2021",
         season: "S22",
@@ -552,13 +559,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2220/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2220/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 0, 28, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s5: {
-        title: "Indianapolis 2",
-        city: "Indianapolis",
-        state: "IN",
+        coast: "West",
+        title: "Glendale",
+        city: "Glendale",
+        state: "AZ",
         number: "25",
         year: "2021",
         season: "S22",
@@ -578,13 +587,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2225/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2225/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 1, 5, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s6: {
-        title: "Indianapolis 3",
-        city: "Indianapolis",
-        state: "IN",
+        coast: "West",
+        title: "Anaheim 3",
+        city: "Anaheim",
+        state: "CA",
         number: "30",
         year: "2021",
         season: "S22",
@@ -604,13 +615,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2230/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2230/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 1, 12, 20, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s7: {
-        title: "Orlando 1",
-        city: "Orlando",
-        state: "IN",
+        coast: "East",
+        title: "Minneapolis",
+        city: "Minneapolis",
+        state: "MN",
         number: "35",
         year: "2021",
         season: "S22",
@@ -630,13 +643,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2235/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2235/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 1, 19, 15, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s8: {
-        title: "Orlando 2",
-        city: "Orlando",
-        state: "FL",
+        coast: "East",
+        title: "Arlington",
+        city: "Arlington",
+        state: "TX",
         number: "40",
         year: "2021",
         season: "S22",
@@ -656,10 +671,12 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2240/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2240/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 1, 26, 18, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s9: {
+        coast: "East",
         title: "Daytona",
         city: "Daytona",
         state: "FL",
@@ -682,13 +699,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2245/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2245/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 2, 5, 16, 30, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s10: {
-        title: "Arlington 1",
-        city: "Arlington",
-        state: "TX",
+        coast: "East",
+        title: "Detroit",
+        city: "Detroit",
+        state: "MI",
         number: "50",
         year: "2021",
         season: "S22",
@@ -708,13 +727,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2250/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2250/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 2, 12, 16, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s11: {
-        title: "Arlington 2",
-        city: "Arlington",
-        state: "TX",
+        coast: "East",
+        title: "Indianapolis",
+        city: "Indianapolis",
+        state: "IN",
         number: "55",
         year: "2021",
         season: "S22",
@@ -734,13 +755,15 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2255/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2255/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 2, 19, 16, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s12: {
-        title: "Arlington 3",
-        city: "Arlington",
-        state: "TX",
+        coast: "West",
+        title: "Seattle",
+        city: "Seattle",
+        state: "WA",
         number: "60",
         year: "2021",
         season: "S22",
@@ -760,13 +783,14 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2260/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2260/S1F1RID.pdf",
-        submissionStart: new Date(2021, 2, 19, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 2, 20, 17, 0, 0, 0),
+        deadline: new Date(2022, 2, 26, 19, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s13: {
-        title: "Atlanta 1",
-        city: "Atlanta",
-        state: "GA",
+        title: "St. Louis",
+        city: "St. Louis",
+        state: "MO",
         number: "65",
         year: "2021",
         season: "S22",
@@ -786,11 +810,12 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2265/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2265/S1F1RID.pdf",
-        submissionStart: new Date(2021, 3, 9, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 3, 10, 12, 0, 0, 0),
+        deadline: new Date(2022, 3, 9, 17, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s14: {
-        title: "Atlanta 2",
+        title: "Atlanta",
         city: "Atlanta",
         state: "GA",
         number: "70",
@@ -812,12 +837,13 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2270/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2270/S1F1RID.pdf",
-        submissionStart: new Date(2021, 3, 12, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 3, 13, 16, 0, 0, 0),
+        deadline: new Date(2022, 3, 16, 12, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s15: {
-        title: "Atlanta 3",
-        city: "Atlanta",
+        title: "Foxborough",
+        city: "Foxborough",
         state: "GA",
         number: "75",
         year: "2021",
@@ -838,13 +864,14 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2275/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2275/S1F1RID.pdf",
-        submissionStart: new Date(2021, 3, 16, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 3, 17, 16, 0, 0, 0),
+        deadline: new Date(2022, 3, 23, 12, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s16: {
-        title: "Salt Lake City 1",
-        city: "Salt Lake City",
-        state: "UT",
+        title: "Denver",
+        city: "Denver",
+        state: "CO",
         number: "80",
         year: "2021",
         season: "S22",
@@ -864,11 +891,12 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2280/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2280/S1F1RID.pdf",
-        submissionStart: new Date(2021, 3, 23, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 3, 24, 16, 0, 0, 0),
+        deadline: new Date(2022, 3, 30, 12, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
       s17: {
-        title: "Salt Lake City 2",
+        title: "Salt Lake City",
         city: "Salt Lake City",
         state: "UT",
         number: "85",
@@ -890,8 +918,9 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2285/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2285/S1F1RID.pdf",
-        submissionStart: new Date(2021, 3, 30, 12, 0, 0, 0),
-        submissionEnd: new Date(2021, 4, 1, 19, 0, 0, 0),
+        deadline: new Date(2022, 4, 7, 17, 0, 0, 0).toLocaleString("en-US", {
+          timeZone: "America/Phoenix",
+        }),
       },
     },
   },
@@ -1262,11 +1291,11 @@ module.exports = {
     },
     2022: {
       m1: {
-        title: "Fox Raceway 1",
-        city: "Pala",
-        state: "CA",
+        title: "",
+        city: "",
+        state: "",
         number: "05",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2205/M1ENTRYLIST.PDF",
@@ -1292,11 +1321,11 @@ module.exports = {
         submissionEnd: new Date(2021, 4, 29, 14, 0, 0, 0),
       },
       m2: {
-        title: "Thunder Valley",
-        city: "Morrison",
-        state: "CO",
+        title: "",
+        city: "",
+        state: "",
         number: "10",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2210/M1ENTRYLIST.PDF",
@@ -1322,11 +1351,11 @@ module.exports = {
         submissionEnd: new Date(2021, 5, 5, 13, 0, 0, 0),
       },
       m3: {
-        title: "High Point",
-        city: "Mount Morris",
-        state: "PA",
+        title: "",
+        city: "",
+        state: "",
         number: "15",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2215/M1ENTRYLIST.PDF",
@@ -1352,11 +1381,11 @@ module.exports = {
         submissionEnd: new Date(2021, 5, 19, 11, 0, 0, 0),
       },
       m4: {
-        title: "Red Bud",
-        city: "Buchanon",
-        state: "MI",
+        title: "",
+        city: "",
+        state: "",
         number: "20",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2220/M1ENTRYLIST.PDF",
@@ -1382,11 +1411,11 @@ module.exports = {
         submissionEnd: new Date(2021, 5, 26, 11, 0, 0, 0),
       },
       m5: {
-        title: "Southwick",
-        city: "Southwick",
-        state: "MA",
+        title: "",
+        city: "",
+        state: "",
         number: "25",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2225/M1ENTRYLIST.PDF",
@@ -1412,11 +1441,11 @@ module.exports = {
         submissionEnd: new Date(2021, 6, 10, 11, 0, 0, 0),
       },
       m6: {
-        title: "Spring Creek",
-        city: "Millville",
-        state: "MN",
+        title: "",
+        city: "",
+        state: "",
         number: "30",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2230/M1ENTRYLIST.PDF",
@@ -1442,11 +1471,11 @@ module.exports = {
         submissionEnd: new Date(2021, 6, 17, 11, 0, 0, 0),
       },
       m7: {
-        title: "Washougal",
-        city: "Washougal",
-        state: "WA",
+        title: "",
+        city: "",
+        state: "",
         number: "35",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2235/M1ENTRYLIST.PDF",
@@ -1472,11 +1501,11 @@ module.exports = {
         submissionEnd: new Date(2021, 6, 24, 14, 0, 0, 0),
       },
       m8: {
-        title: "Unadilla",
-        city: "New Berlin",
-        state: "NY",
+        title: "",
+        city: "",
+        state: "",
         number: "40",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2240/M1ENTRYLIST.PDF",
@@ -1502,11 +1531,11 @@ module.exports = {
         submissionEnd: new Date(2021, 7, 14, 11, 0, 0, 0),
       },
       m9: {
-        title: "Budds Creen",
-        city: "Mechanicsville",
-        state: "MD",
+        title: "",
+        city: "",
+        state: "",
         number: "45",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2245/M1ENTRYLIST.PDF",
@@ -1532,11 +1561,11 @@ module.exports = {
         submissionEnd: new Date(2021, 7, 21, 11, 0, 0, 0),
       },
       m10: {
-        title: "Ironman",
-        city: "Crawfordsville",
-        state: "IN",
+        title: "",
+        city: "",
+        state: "",
         number: "50",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2250/M1ENTRYLIST.PDF",
@@ -1562,11 +1591,11 @@ module.exports = {
         submissionEnd: new Date(2021, 7, 28, 11, 0, 0, 0),
       },
       m11: {
-        title: "Fox Raceway 2",
-        city: "Pala",
-        state: "CA",
+        title: "",
+        city: "",
+        state: "",
         number: "55",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2255/M1ENTRYLIST.PDF",
@@ -1592,11 +1621,11 @@ module.exports = {
         submissionEnd: new Date(2021, 8, 4, 14, 0, 0, 0),
       },
       m12: {
-        title: "Hangtown",
-        city: "Rancho Cordoba",
-        state: "CA",
+        title: "",
+        city: "",
+        state: "",
         number: "60",
-        year: "2021",
+        year: "2022",
         season: "M22",
         entryList:
           "http://americanmotocrossresults.com/xml/mx/events/M2260/M1ENTRYLIST.PDF",

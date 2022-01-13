@@ -1,4 +1,3 @@
-// import App from 'next/app'
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
@@ -14,10 +13,8 @@ import "../styles/fonts.css";
 
 function ModernMotoFantasy({ Component, pageProps }) {
   const [currentMode, setCurrentMode] = useState();
-  // const [raceResults, setRaceResults] = useState();
   const { user, loading } = useAuth();
   const router = useRouter();
-  // const apiRequests = apiType[currentRound.type];
 
   const isLoginOrLandingPage = useMemo(() => {
     return Boolean(router.pathname === "/login" || router.pathname === "/");
@@ -34,35 +31,10 @@ function ModernMotoFantasy({ Component, pageProps }) {
     } else {
       setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
     }
-  }, []);
+  });
 
-  // const getLiveResultsFallBack = useCallback(() => {
-  //   axios.get(apiRequests.liveResults).then(({ data }) => {
-  //     console.log("LIVE", { data, apiRequests });
-  //     setRaceResults(data);
-  //   });
-  // }, [raceResults]);
-
-  // useEffect(() => {
-  //   if (!raceResults) {
-  //     axios
-  //       .get(apiRequests.weekResults)
-  //       .then(({ data }) => {
-  //         console.log("WEEK", { data });
-  //         setRaceResults(data);
-  //       })
-  //       .catch((err) => {
-  //         console.log("Live Results Error > _app: ", err);
-  //         if (!raceResults && apiRequests.liveResults) {
-  //           getLiveResultsFallBack();
-  //         }
-  //       });
-  //   }
-  // }, [raceResults]);
-  // console.log({ raceResults, apiRequests });
   const handleCurrentModeUpdate = () => {
     const currentMode = localStorage.getItem("USER_CURRENT_MODE");
-
     const modeToSet = parseInt(currentMode) ? 0 : 1;
 
     setCurrentMode(modeToSet);
@@ -82,7 +54,6 @@ function ModernMotoFantasy({ Component, pageProps }) {
       </Head>
       <CurrentUserContextProvider>
         <CurrentModeContext.Provider value={currentMode}>
-          {/* <CurrentRaceResultsProvider raceResults={raceResults}> */}
           {!isLoginOrLandingPage && (
             <Header
               tabs={defaultTabs}
@@ -92,7 +63,6 @@ function ModernMotoFantasy({ Component, pageProps }) {
             />
           )}
           <Component {...pageProps} user={user} loading={loading} />
-          {/* </CurrentRaceResultsProvider> */}
         </CurrentModeContext.Provider>
       </CurrentUserContextProvider>
     </AppStyled>

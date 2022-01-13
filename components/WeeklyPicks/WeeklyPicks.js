@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import PicksStyled from './PicksStyled';
-import RiderSelect from '../RiderSelect/RiderSelect';
-import currentRound from '../../constants/currentRound';
+import React, { useMemo } from "react";
+import PicksStyled from "./PicksStyled";
+import RiderSelect from "../RiderSelect/RiderSelect";
+import currentRound from "../../constants/currentRound";
 
 const WeeklyPicks = ({
   riders,
@@ -141,7 +141,7 @@ const WeeklyPicks = ({
         riderPosition={10}
         value={riderPositions.tenth}
       />
-      {currentRound.type === 'sx' ? (
+      {currentRound.type === "sx" ? (
         <RiderSelect
           onChange={handleRiderSelection}
           options={riders}
