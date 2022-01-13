@@ -1,72 +1,55 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
-import { LeagueCard, NoAccess } from "../../components";
+import React, { useEffect, useMemo } from "react";
+import {
+  FastLaps,
+  LastRoundDetailed,
+  LeagueCard,
+  NoAccess,
+} from "../../components";
 import ModernButton from "../../components/Button/Button";
-import { apiType, manufacturers } from "../../constants";
-import { useAuth, useCurrentMode } from "../../hooks";
+import { apiType } from "../../constants";
+import { useAuth, useCurrentMode, useCurrentUser } from "../../hooks";
 import { useRaceResults } from "../../hooks/raceResults";
 import { HomeStyled } from "../../styles";
 
 const Home = () => {
   const router = useRouter();
   const { currentMode } = useCurrentMode();
-  const currentWeekWithLiveResults = useRaceResults();
   const { user, loading } = useAuth();
-  const [userWithPicks, setUserWithPicks] = useState(null);
-  const [userWithNoAccess, setUserWithNoSuccess] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const currentWeekWithLiveResults = useRaceResults();
+  const { currentUser, isLoading, userWithNoAccess } = useCurrentUser(user);
   const apiRequests = apiType[currentWeekWithLiveResults?.type];
+  console.log({ currentUser });
 
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
-      setUserWithPicks(null);
       router.push("/login");
       return null;
     }
 
     if (!currentWeekWithLiveResults) return;
-
-    if (user && user?.email && !userWithPicks && !isLoading) {
-      axios
-        .get(
-          `${apiRequests?.getUser}/${user?.email}?type=${currentWeekWithLiveResults?.type}`
-        )
-        .then(({ data: userData }) => {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 200);
-          if (userData.success) {
-            setUserWithPicks(userData.user);
-            return;
-          }
-
-          setUserWithNoSuccess(userData);
-        })
-        .catch((e) => console.log("Error getting user > Home", e));
-      return;
-    }
-  }, [user, userWithPicks]);
+  }, [user]);
 
   const lastRoundDetails = useMemo(() => {
-    if (userWithPicks && userWithPicks.currentRound.length) {
+    if (currentUser && currentUser.currentRound.length) {
       const roundToShow =
-        userWithPicks.leaguePicks[currentWeekWithLiveResults?.year][
+        currentUser.leaguePicks[currentWeekWithLiveResults?.year][
           currentWeekWithLiveResults?.type
         ][`week${currentWeekWithLiveResults?.leagueRoundToShow}`];
 
       if (!roundToShow) {
-        return userWithPicks.picks
+        return currentUser.picks
           .filter((pick) => pick.type === currentWeekWithLiveResults?.type)
           .sort((a, b) => b.week - a.week)[0];
       }
 
-      return roundToShow.find((pick) => pick.email === userWithPicks.email);
+      return roundToShow.find((pick) => pick.email === currentUser.email);
     }
 
     return null;
-  }, [userWithPicks]);
+  }, [currentUser]);
 
   const assignPoints = () => {
     axios
@@ -93,7 +76,7 @@ const Home = () => {
     isLoading ||
     !currentWeekWithLiveResults ||
     !user ||
-    !userWithPicks
+    !currentUser
   ) {
     return <CircularProgress />;
   }
@@ -105,6 +88,7 @@ const Home = () => {
     year,
     message,
   } = currentWeekWithLiveResults;
+  console.log({ LastRoundDetailed, FastLaps });
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&
@@ -112,22 +96,9 @@ const Home = () => {
       pdfResults.raceResults ? (
         <ModernButton label="Assign Points" onClick={assignPoints} />
       ) : null}
-      {lastRoundDetails && (
-        <div className="user-details">
-          <h1>{`Current Round: ${week}`}</h1>
-          <h2>{`Season: ${year}`}</h2>
-          <h2>{`${
-            lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
-          }  Round ${lastRoundDetails.week} Score: ${
-            lastRoundDetails.totalPoints
-          }`}</h2>
-          <h2>{`${
-            lastRoundDetails.type[0].toUpperCase() + lastRoundDetails.type[1]
-          } Round ${lastRoundDetails.week} Rank: ${lastRoundDetails.rank}`}</h2>
-        </div>
-      )}
-      {userWithPicks?.leaguePicks?.length &&
-        userWithPicks.leaguePicks.map((leaguePick) => {
+      <LastRoundDetailed week={week} year={year} details={lastRoundDetails} />
+      {currentUser?.leaguePicks?.length &&
+        currentUser.leaguePicks.map((leaguePick) => {
           return (
             <LeagueCard
               key={`${Object.keys(leaguePick)[0]}`}
@@ -135,63 +106,8 @@ const Home = () => {
             />
           );
         })}
-      {!message && liveResults.fastestLaps.length > 0 ? (
-        <>
-          {/* <div className="marquee">
-            <div className="animation-container">
-              <span>FAST LAPS</span>
-              {liveResults.fastestLaps.map(
-                ({ riderName, bestLap, bike }, index) => {
-                  return (
-                    <div
-                      key={`${riderName}-fast-lap`}
-                      className={`fast-lap ${index}`}
-                    >
-                      <img
-                        src={manufacturers[bike.toLowerCase()].image}
-                        alt=""
-                        className="rider-image"
-                      />
-                      <div>{riderName}</div>
-                      <div>{bestLap}</div>
-                    </div>
-                  );
-                }
-              )}
-            </div>
-          </div> */}
-          <div className="mobile-fast-laps">
-            <h3>Top 3 LapTimes</h3>
-            {liveResults.fastestLaps
-              .slice(0, 3)
-              .map(({ riderName, bestLap, bike }, index) => {
-                return (
-                  <div
-                    key={`${riderName}-fast-lap`}
-                    className={`fast-lap ${index}`}
-                  >
-                    {bike && (
-                      <img
-                        src={
-                          manufacturers[bike.split(" ")[0].toLowerCase()].image
-                        }
-                        alt=""
-                        className="rider-image"
-                      />
-                    )}
-                    <div>{riderName}</div>
-                    <div>{bestLap}</div>
-                  </div>
-                );
-              })}
-          </div>
-        </>
-      ) : (
-        <div className="user-details">{message}</div>
-      )}
-      <main>
-        <h1 className="title"></h1>
-      </main>
+      <FastLaps liveResults={liveResults} s />
+      {message && <div className="user-details">{message}</div>}
     </HomeStyled>
   );
 };
