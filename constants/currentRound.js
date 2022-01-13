@@ -1,7 +1,7 @@
 module.exports = {
   type: "sx",
-  round: "s1",
-  week: 1,
+  round: "s2",
+  week: 2,
   leagueRoundToShow: null,
   year: "2022",
 };
