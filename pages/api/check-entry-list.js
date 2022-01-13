@@ -1,5 +1,5 @@
-import crawler from 'crawler-request';
-import { scheduledData } from '../../constants';
+import crawler from "crawler-request";
+import { scheduledData } from "../../constants";
 
 const riderMapper = (collectedEntryList) =>
   collectedEntryList.reduce((riderObjects, currentRider) => {
@@ -34,16 +34,15 @@ const collectEntryListData = (splicedEntryList) => {
 };
 
 const spliceEntryList = (formattedResponse) => {
-  const startingIndex = formattedResponse.indexOf('SPONSORS');
+  const startingIndex = formattedResponse.indexOf("SPONSORS");
   const riderData = formattedResponse.splice(startingIndex + 1);
   return riderData;
 };
 
 export default async (req, res) => {
   try {
-    const { round } = req.query;
-    const currentWeek = scheduledData[round];
-
+    const { round, year, type } = req.query;
+    const currentWeek = scheduledData[type][year][round];
     await Promise.all([
       crawler(currentWeek.entryList),
       crawler(currentWeek.smallBikeEntryList),
@@ -56,14 +55,14 @@ export default async (req, res) => {
         });
       }
       if (response[0] && !response[0].error) {
-        const formattedResponse = response[0].text.split('\n');
+        const formattedResponse = response[0].text.split("\n");
 
         riders.bigBike = riderMapper(
           collectEntryListData(spliceEntryList(formattedResponse))
         );
       }
       if (response[1] && !response[1].error) {
-        const formattedResponse = response[1].text.split('\n');
+        const formattedResponse = response[1].text.split("\n");
 
         riders.smallBike = riderMapper(
           collectEntryListData(spliceEntryList(formattedResponse))
@@ -76,6 +75,6 @@ export default async (req, res) => {
       });
     });
   } catch (error) {
-    res.status(404).send('Entry list not yet available.');
+    res.status(404).send("Entry list not yet available.");
   }
 };
