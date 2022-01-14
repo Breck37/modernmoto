@@ -3,7 +3,7 @@ export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as FrontPlate } from "./FrontPlate/FrontPlate";
 export { default as FrontPlateSmall } from "./FrontPlate/FrontPlateSmall";
 export { default as Header } from "./Header/Header";
-export * from "./Home";
+export { FastLaps, LastRoundDetailed } from "./Home";
 export { default as LeagueCard } from "./LeagueCard/LeagueCard";
 export { default as Modal } from "./Modal/Modal";
 export { default as NoAccess } from "./NoAccess";

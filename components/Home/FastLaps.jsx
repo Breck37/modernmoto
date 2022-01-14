@@ -1,7 +1,7 @@
 import React from "react";
 import { manufacturers } from "../../constants";
 
-const FastLaps = ({ liveResults }) => {
+export const FastLaps = ({ liveResults }) => {
   return <Presentation liveResults={liveResults} />;
 };
 
@@ -56,5 +56,3 @@ const Presentation = ({ liveResults }) => {
       </div>
     );
 };
-
-export default FastLaps;
