@@ -1,6 +1,6 @@
 import React from "react";
 
-const LastRoundDetailed = ({ details, week, year }) => {
+export const LastRoundDetailed = ({ details, week, year }) => {
   return <Presentation week={week} year={year} details={details} />;
 };
 
