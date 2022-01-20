@@ -21,8 +21,6 @@ const Home = () => {
   const currentWeekWithLiveResults = useRaceResults();
   const { currentUser, isLoading, userWithNoAccess } = useCurrentUser(user);
   const apiRequests = apiType[currentWeekWithLiveResults?.type];
-  console.log({ currentUser });
-
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       router.push("/login");
@@ -74,7 +72,8 @@ const Home = () => {
   if (
     loading ||
     isLoading ||
-    !currentWeekWithLiveResults ||
+    (!currentWeekWithLiveResults.loading &&
+      !currentWeekWithLiveResults.liveResults) ||
     !user ||
     !currentUser
   ) {
@@ -88,7 +87,6 @@ const Home = () => {
     year,
     message,
   } = currentWeekWithLiveResults;
-  console.log({ LastRoundDetailed, FastLaps });
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&

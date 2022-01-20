@@ -55,22 +55,60 @@ export default async (req, res) => {
       if (response.error) {
         res.status(200).send({
           ...currentRound,
-          ...liveResults,
+          raceResults: {
+            big: null,
+            small: null,
+          },
+          seasonResults: {
+            big: null,
+            small: null,
+          },
+          lapTimes: {
+            big: null,
+            small: null,
+          },
+          session: liveResults.session,
+          round: liveResults.round,
           liveResults,
         });
       }
+
+      if (!response.filter((res) => res.text !== null).length) {
+        console.log("IS EMPTY");
+        res.status(200).send({
+          ...currentRound,
+          raceResults: {
+            big: null,
+            small: null,
+          },
+          seasonResults: {
+            big: null,
+            small: null,
+          },
+          lapTimes: {
+            big: null,
+            small: null,
+          },
+          session: liveResults.session,
+          round: liveResults.round,
+          liveResults,
+        });
+        return;
+      }
+
       const mainResultsBig = response[0];
       const mainResultsSmall = response[1];
       const mainLapsBig = response[2];
-      // const mainLapsSmall = response[3];
+      const mainLapsSmall = response[3];
+
       if (response && !response.error) {
         // BigBikeLapTimes
         const bigLapFormatted = mainLapsBig.text.split("\n");
-        const splicedLaps = spliceLaps(bigLapFormatted);
-        // console.log(splicedLaps);
+        const bigBikeFastLaps = spliceLaps(bigLapFormatted);
 
         // SmallbikeLapTimes
-        // const smallLapFormatted = mainLapsSmall.text.split("\n");
+        const smallLapFormatted = mainLapsSmall.text.split("\n");
+        const smallBikeFastLaps = spliceLaps(smallLapFormatted);
 
         // 250 Main Race Results
         const smallFormattedResponse = mainResultsSmall.text.split("\n");
@@ -99,8 +137,8 @@ export default async (req, res) => {
             small: smallSeasonResults,
           },
           lapTimes: {
-            big: null,
-            small: null,
+            big: bigBikeFastLaps,
+            small: smallBikeFastLaps,
           },
           session: liveResults.session,
           round: liveResults.round,

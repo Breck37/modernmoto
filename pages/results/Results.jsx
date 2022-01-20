@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { manufacturers } from '../../constants';
-import { Table, RiderRow } from '../../components';
-import { ResultsStyled } from '../../styles';
-import { CircularProgress } from '@material-ui/core';
-import { useRaceResults } from '../../hooks/raceResults';
-import { useCurrentMode } from '../../hooks/currentMode';
+import { CircularProgress, Table } from "@material-ui/core";
+import React, { useState } from "react";
+import { RiderRow } from "../../components/RiderRow";
+import { manufacturers } from "../../constants";
+import { useCurrentMode } from "../../hooks/currentMode";
+import { useRaceResults } from "../../hooks/raceResults";
+import { ResultsStyled } from "../../styles";
 
 const Results = () => {
   const [currentRider, setCurrentRider] = useState(null);
   const raceResults = useRaceResults();
   const { currentMode } = useCurrentMode();
 
-
   const handleClickedRider = (rider) => {
     setCurrentRider(rider);
   };
 
   const TableHeaderRow = {
-    position: 'Pos',
-    riderName: 'Rider Name',
-    team: 'Team',
-    bestLap: 'Best Lap',
-    lastLap: 'Last Lap',
-    number: '#',
-    currentLap: 'Lap',
-    bike: 'Bike',
+    position: "Pos",
+    riderName: "Rider Name",
+    team: "Team",
+    bestLap: "Best Lap",
+    lastLap: "Last Lap",
+    number: "#",
+    currentLap: "Lap",
+    bike: "Bike",
   };
 
-  if (!raceResults) {
+  if (!raceResults || !raceResults.liveResults) {
     return <CircularProgress />;
   }
 
@@ -43,19 +42,21 @@ const Results = () => {
     <ResultsStyled
       currentMode={currentMode}
       fastLapLeaderLegend={
-        manufacturers[raceResults.liveResults.fastLapLeader.bike.toLowerCase()]
-          ?.rgb
+        manufacturers[
+          raceResults.liveResults.fastLapLeader.bike.split(" ")[0].toLowerCase()
+        ]?.rgb
       }
     >
       <main>
         <div className="round-details">
           <h1>{raceResults.liveResults.round}</h1>
           <h2>{`Week: ${raceResults.week}`}</h2>
-          <h4>{raceResults.liveResults.session.split(' - ')[0]}</h4>
+          <h4>{raceResults.liveResults.session.split(" - ")[0]}</h4>
         </div>
         <div className="fastest-key">
           <div className="color-sample" />
           <span>Fastest Lap</span>
+          <span className="fast-lap-info">{`${raceResults.liveResults.fastLapLeader.riderName} - ${raceResults.liveResults.fastLapLeader.bestLap}`}</span>
         </div>
         {raceResults && raceResults.liveResults.raceResults.length ? (
           <Table

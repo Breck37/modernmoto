@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { manufacturers } from "../../constants";
-import currentRound from "../../constants/currentRound";
-import scheduledData from "../../constants/scheduledData";
 import { useCurrentMode } from "../../hooks";
 
 const useStyles = makeStyles(() => ({
@@ -28,14 +26,12 @@ export const FastLaps = ({ liveResults }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { currentMode } = useCurrentMode();
   const classes = useStyles();
-  const apiRequests =
-    scheduledData[currentRound.type][currentRound.year][currentRound.round];
+  // const apiRequests =
+  // scheduledData[currentRound.type][currentRound.year][currentRound.round];
 
   const handleTabChange = (newValue) => {
     setCurrentTab(newValue);
   };
-
-  // request confirm
 
   return (
     <Presentation
@@ -104,7 +100,6 @@ const Presentation = ({
           {liveResults.fastestLaps
             .slice(0, 3)
             .map(({ riderName, bestLap, bike }, index) => {
-              console.log({ manufacturers, bike });
               return (
                 <div
                   key={`${riderName}-fast-lap`}
