@@ -461,6 +461,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2205/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2205/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2205/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2205/S2ENTRYLIST.PDF",
         officialResults:
@@ -489,6 +493,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2210/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2210/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2210/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2210/S2ENTRYLIST.PDF",
         officialResults:
@@ -503,6 +511,7 @@ module.exports = {
           "https://results.amasupercross.com/xml/SX/events/S2210/S2F1RID.pdf",
         bigBikeLapTimes:
           "https://results.amasupercross.com/xml/SX/events/S2210/S1F1RID.pdf",
+
         deadline: new Date(2022, 0, 15, 20, 0, 0, 0).toLocaleString("en-US", {
           timeZone: "America/Phoenix",
         }),
@@ -519,6 +528,10 @@ module.exports = {
           "https://results.amasupercross.com/xml/sx/events/S2215/S1ENTRYLIST.PDF",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2215/S2ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2215/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2215/S2F1RES.pdf",
         officialResults:
           "https://results.amasupercross.com/xml/SX/events/S2215/S1F1PRESS.pdf",
         smallBikeOfficialResults:
@@ -545,6 +558,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2220/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2220/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2220/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2220/S2ENTRYLIST.PDF",
         officialResults:
@@ -573,6 +590,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2225/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2225/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2225/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2225/S2ENTRYLIST.PDF",
         officialResults:
@@ -601,6 +622,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2230/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2230/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2230/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2230/S2ENTRYLIST.PDF",
         officialResults:
@@ -629,6 +654,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2235/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2235/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2235/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2235/S2ENTRYLIST.PDF",
         officialResults:
@@ -657,6 +686,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2240/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2240/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2240/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2240/S2ENTRYLIST.PDF",
         officialResults:
@@ -685,6 +718,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2245/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2245/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2245/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2245/S2ENTRYLIST.PDF",
         officialResults:
@@ -713,6 +750,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2250/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2250/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2250/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2250/S2ENTRYLIST.PDF",
         officialResults:
@@ -741,6 +782,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2255/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2255/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2255/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2255/S2ENTRYLIST.PDF",
         officialResults:
@@ -769,6 +814,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2260/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2260/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2260/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2260/S2ENTRYLIST.PDF",
         officialResults:
@@ -796,6 +845,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2265/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2265/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2265/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2265/S2ENTRYLIST.PDF",
         officialResults:
@@ -823,6 +876,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2270/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2270/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2270/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2270/S2ENTRYLIST.PDF",
         officialResults:
@@ -850,6 +907,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2275/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2275/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2275/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2275/S2ENTRYLIST.PDF",
         officialResults:
@@ -877,6 +938,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2280/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2280/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2280/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2280/S2ENTRYLIST.PDF",
         officialResults:
@@ -904,6 +969,10 @@ module.exports = {
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2285/S1ENTRYLIST.PDF",
+        provisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2285/S1F1RES.pdf",
+        smallProvisionalResults:
+          "https://archives.amasupercross.com/xml/SX/events/S2285/S2F1RES.pdf",
         smallBikeEntryList:
           "https://results.amasupercross.com/xml/sx/events/S2285/S2ENTRYLIST.PDF",
         officialResults:

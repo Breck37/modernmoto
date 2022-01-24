@@ -1,6 +1,6 @@
 import crawler from "crawler-request";
 import { currentRound, scheduledData } from "../../../constants";
-import { lapsMapper } from "../../../helpers";
+import { pdfLapsMapper, spliceLaps } from "../../../helpers";
 import {
   mapper,
   resultsMapper,
@@ -16,14 +16,12 @@ export const getLiveResults = async () =>
         const formattedResponse = JSON.parse(response.html);
         const raceResults = resultsMapper(formattedResponse.B);
 
-        const fastestLaps = lapsMapper([...raceResults]);
+        // const fastestLaps = lapsMapper([...raceResults]);
 
         return {
           raceResults,
-          fastestLaps,
           session: formattedResponse.S,
           round: formattedResponse.T,
-          fastLapLeader: fastestLaps ? fastestLaps[0] : null,
         };
       }
     })
@@ -37,22 +35,90 @@ export const getLiveResults = async () =>
 // };
 
 export default async (req, res) => {
-  const url =
-    scheduledData[currentRound.type][currentRound.year][currentRound.round]
-      ?.officialResults;
+  const weekLinks =
+    scheduledData[currentRound.type][currentRound.year][currentRound.round];
+  const mainUrl = weekLinks?.officialResults;
+  const smallMainUrl = weekLinks?.smallBikeOfficialResults;
+  const bigBikeLapTimesUrl = weekLinks.bigBikeLapTimes;
+  const smallBikeLapTimesUrl = weekLinks.smallBikeLapTimes;
 
   const liveResults = await getLiveResults();
-  crawler(url)
+  await Promise.all([
+    crawler(mainUrl),
+    crawler(smallMainUrl),
+    crawler(bigBikeLapTimesUrl),
+    crawler(smallBikeLapTimesUrl),
+  ])
     .then((response) => {
       if (response.error) {
         res.status(200).send({
           ...currentRound,
-          ...liveResults,
+          raceResults: {
+            big: null,
+            small: null,
+          },
+          seasonResults: {
+            big: null,
+            small: null,
+          },
+          lapTimes: {
+            big: null,
+            small: null,
+          },
+          session: liveResults.session,
+          round: liveResults.round,
           liveResults,
         });
       }
+
+      if (!response.filter((res) => res.text !== null).length) {
+        res.status(200).send({
+          ...currentRound,
+          raceResults: {
+            big: null,
+            small: null,
+          },
+          seasonResults: {
+            big: null,
+            small: null,
+          },
+          lapTimes: {
+            big: null,
+            small: null,
+          },
+          session: liveResults.session,
+          round: liveResults.round,
+          liveResults,
+        });
+        return;
+      }
+
+      const mainResultsBig = response[0];
+      const mainResultsSmall = response[1];
+      const mainLapsBig = response[2];
+      const mainLapsSmall = response[3];
       if (response && !response.error) {
-        const formattedResponse = response.text.split("\n");
+        // BigBikeLapTimes
+        const bigLapFormatted = mainLapsBig.text.split("\n");
+        const bigBikeFastLaps = spliceLaps(bigLapFormatted);
+        const bigFastestLaps = pdfLapsMapper(bigBikeFastLaps);
+
+        // SmallbikeLapTimes
+        const smallLapFormatted = mainLapsSmall.text.split("\n");
+        const smallBikeFastLaps = spliceLaps(smallLapFormatted);
+        const smallFastestLaps = pdfLapsMapper(smallBikeFastLaps);
+
+        // 250 Main Race Results
+        const smallFormattedResponse = mainResultsSmall.text.split("\n");
+        const smallRaceResults = mapper(
+          spliceResults([...smallFormattedResponse], 14)
+        );
+        const smallSeasonResults = seasonMapper(
+          spliceSeasonResults(smallFormattedResponse)
+        );
+
+        // 450 Main Race Results
+        const formattedResponse = mainResultsBig.text.split("\n");
         const raceResults = mapper(spliceResults([...formattedResponse], 14));
         const seasonResults = seasonMapper(
           spliceSeasonResults(formattedResponse)
@@ -60,13 +126,32 @@ export default async (req, res) => {
 
         res.status(200).send({
           ...currentRound,
-          raceResults,
-          seasonResults,
+          raceResults: {
+            big: raceResults,
+            small: smallRaceResults,
+          },
+          seasonResults: {
+            big: seasonResults,
+            small: smallSeasonResults,
+          },
+          lapTimes: {
+            big: bigBikeFastLaps,
+            small: smallBikeFastLaps,
+          },
           session: liveResults.session,
           round: liveResults.round,
-          liveResults,
+          liveResults: {
+            ...liveResults,
+            fastestLaps: {
+              ...liveResults.fastestLaps,
+              bigFastLapLeader: bigFastestLaps ? bigFastestLaps[0] : null,
+              smallFastLapLeader: smallFastestLaps ? smallFastestLaps[0] : null,
+              big: bigFastestLaps,
+              small: smallFastestLaps,
+            },
+          },
         });
       }
     })
-    .catch((e) => console.error("/get-live-results", e));
+    .catch((e) => console.error("/get-week-results", e));
 };

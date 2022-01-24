@@ -10,8 +10,12 @@ import {
 } from "../../components";
 import ModernButton from "../../components/Button/Button";
 import { apiType } from "../../constants";
-import { useAuth, useCurrentMode, useCurrentUser } from "../../hooks";
-import { useRaceResults } from "../../hooks/raceResults";
+import {
+  useAuth,
+  useCurrentMode,
+  useCurrentUser,
+  useRaceResults,
+} from "../../hooks";
 import { HomeStyled } from "../../styles";
 
 const Home = () => {
@@ -21,8 +25,6 @@ const Home = () => {
   const currentWeekWithLiveResults = useRaceResults();
   const { currentUser, isLoading, userWithNoAccess } = useCurrentUser(user);
   const apiRequests = apiType[currentWeekWithLiveResults?.type];
-  console.log({ currentUser });
-
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       router.push("/login");
@@ -67,18 +69,19 @@ const Home = () => {
       .catch((e) => console.warn("ERROR", { e }));
   };
 
-  if (userWithNoAccess) {
-    <NoAccess data={userWithNoAccess} />;
-  }
-
   if (
     loading ||
     isLoading ||
-    !currentWeekWithLiveResults ||
+    (!currentWeekWithLiveResults.loading &&
+      !currentWeekWithLiveResults.liveResults) ||
     !user ||
     !currentUser
   ) {
     return <CircularProgress />;
+  }
+
+  if (userWithNoAccess) {
+    return <NoAccess data={userWithNoAccess} />;
   }
 
   const {
@@ -88,7 +91,7 @@ const Home = () => {
     year,
     message,
   } = currentWeekWithLiveResults;
-  console.log({ LastRoundDetailed, FastLaps });
+
   return (
     <HomeStyled currentMode={currentMode}>
       {user.email === process.env.ADMIN_USER &&

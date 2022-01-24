@@ -1,5 +1,4 @@
-import axios from 'axios';
-import useSWR from 'swr';
+import useSWR from "swr";
 
 function fetcher(route) {
   /* our token cookie gets sent with this request */
@@ -10,7 +9,7 @@ function fetcher(route) {
 
 export default function useAuth() {
   let dbUser = {};
-  const { data: user, error } = useSWR('/api/user', fetcher);
+  const { data: user, error } = useSWR("/api/user", fetcher);
   const loading = user === undefined;
 
   // if(user) {
@@ -25,7 +24,7 @@ export default function useAuth() {
   return {
     user: {
       ...user,
-      ...dbUser
+      ...dbUser,
     },
     loading,
     error,

@@ -12,7 +12,7 @@ export const useCurrentUser = (user) => {
   const apiRequests = apiType[currentRound.type];
 
   useEffect(() => {
-    if (!currentUser && user) {
+    if (!currentUser && user?.email) {
       setIsLoading(true);
       axios
         .get(
@@ -22,9 +22,10 @@ export const useCurrentUser = (user) => {
           setIsLoading(false);
           if (data.success) {
             setCurrentUser(data.user);
+          } else {
+            setUserWithNoAccess(data);
           }
-
-          setUserWithNoAccess(data);
+          return;
         })
         .catch((err) => {
           setIsLoading(false);
