@@ -1,9 +1,10 @@
-const mapper = require('./mapper');
-const spliceResults = require('./splice-results');
-const spliceSeasonResults = require('./splice-season-results');
-const seasonMapper = require('./season-mapper');
-const resultsMapper = require('./results-mapper');
-const lapsMapper = require('../laps-mapper');
+const mapper = require("./mapper");
+const spliceResults = require("./splice-results");
+const spliceSeasonResults = require("./splice-season-results");
+const seasonMapper = require("./season-mapper");
+const resultsMapper = require("./results-mapper");
+const { lapsMapper } = require("../live-results-laps-mapper");
+const { pdfLapsMapper } = require("../pdf-laps-mapper");
 
 module.exports = {
   mapper,
@@ -12,4 +13,5 @@ module.exports = {
   seasonMapper,
   resultsMapper,
   lapsMapper,
+  pdfLapsMapper,
 };

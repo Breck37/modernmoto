@@ -2,7 +2,6 @@ import { Paper, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { manufacturers } from "../../constants";
 import { useCurrentMode } from "../../hooks";
 
 const useStyles = makeStyles(() => ({
@@ -26,16 +25,16 @@ export const FastLaps = ({ liveResults }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { currentMode } = useCurrentMode();
   const classes = useStyles();
-  // const apiRequests =
+  //const apiRequests =
   // scheduledData[currentRound.type][currentRound.year][currentRound.round];
 
-  const handleTabChange = (newValue) => {
+  const handleTabChange = (_, newValue) => {
     setCurrentTab(newValue);
   };
 
   return (
     <Presentation
-      liveResults={liveResults}
+      liveResults={liveResults?.fastestLaps}
       handleTabChange={handleTabChange}
       currentTab={currentTab}
       currentMode={currentMode}
@@ -51,77 +50,70 @@ const Presentation = ({
   currentMode,
   classes,
 }) => {
-  if (liveResults?.fastestLaps?.length > 0)
-    return (
-      <Wrap>
-        <Paper
-          square
-          className={currentMode ? classes.primary : classes.secondary}
+  const lapsToDisplay = currentTab ? liveResults?.big : liveResults?.small;
+
+  return (
+    <Wrap>
+      <Paper
+        square
+        className={currentMode ? classes.primary : classes.secondary}
+      >
+        <ModernTabs
+          onChange={handleTabChange}
+          value={currentTab}
+          currentMode={currentMode}
+          className={
+            currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
+          }
         >
-          <ModernTabs
-            onChange={handleTabChange}
-            value={currentTab}
-            currentMode={currentMode}
-            className={
-              currentMode
-                ? classes.indicatorPrimary
-                : classes.indicatorSecondary
-            }
-          >
-            <Tab label="250" />
-            <Tab label="450" />
-          </ModernTabs>
-        </Paper>
-        {/* // <div className="marquee">
-      //   <div className="animation-container">
-      //     <span>FAST LAPS</span>
-      //     {liveResults.fastestLaps.map(
-      //       ({ riderName, bestLap, bike }, index) => {
-      //         return (
-      //           <div
-      //             key={`${riderName}-fast-lap`}
-      //             className={`fast-lap ${index}`}
-      //           >
-      //             <img
-      //               src={manufacturers[bike.toLowerCase()].image}
-      //               alt=""
-      //               className="rider-image"
-      //             />
-      //             <div>{riderName}</div>
-      //             <div>{bestLap}</div>
-      //           </div>
-      //         );
-      //       }
-      //     )}
-      //   </div>
-      // </div> */}
-        <div className="mobile-fast-laps">
-          <h3>Top 3 LapTimes</h3>
-          {liveResults.fastestLaps
-            .slice(0, 3)
-            .map(({ riderName, bestLap, bike }, index) => {
-              return (
-                <div
-                  key={`${riderName}-fast-lap`}
-                  className={`fast-lap ${index}`}
-                >
-                  {bike && (
-                    <img
-                      src={
-                        manufacturers[bike.split(" ")[0].toLowerCase()].image
-                      }
-                      alt=""
-                      className="rider-image"
-                    />
-                  )}
-                  <div>{riderName}</div>
-                  <div>{bestLap}</div>
-                </div>
-              );
-            })}
-        </div>
-      </Wrap>
-    );
+          <Tab label="250" />
+          <Tab label="450" />
+        </ModernTabs>
+      </Paper>
+      {/* // <div className="marquee">
+     //   <div className="animation-container">
+     //     <span>FAST LAPS</span>
+     //     {liveResults.fastestLaps.map(
+       //       ({ riderName, bestLap, bike }, index) => {
+         //         return (
+           //           <div
+           //             key={`${riderName}-fast-lap`}
+           //             className={`fast-lap ${index}`}
+           //           >
+           //             <img
+           //               src={manufacturers[bike.toLowerCase()].image}
+           //               alt=""
+           //               className="rider-image"
+           //             />
+           //             <div>{riderName}</div>
+           //             <div>{bestLap}</div>
+           //           </div>
+           //         );
+           //       }
+           //     )}
+           //   </div>
+         // </div> */}
+      <div className="mobile-fast-laps">
+        <h3>Top 3 LapTimes</h3>
+        {lapsToDisplay
+          ?.slice(0, 3)
+          .map(({ riderName, bestLap, bike }, index) => {
+            return (
+              <div
+                key={`${riderName}-fast-lap`}
+                className={`fast-lap ${index}`}
+              >
+                {bike && (
+                  <img src={bike.image} alt="" className="rider-image" />
+                )}
+                <div>{riderName}</div>
+                <div>{bestLap}</div>
+              </div>
+            );
+          })}
+      </div>
+    </Wrap>
+  );
 };
 
 const Wrap = styled.div`

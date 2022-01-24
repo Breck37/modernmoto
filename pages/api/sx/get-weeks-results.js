@@ -1,6 +1,6 @@
 import crawler from "crawler-request";
 import { currentRound, scheduledData } from "../../../constants";
-import { lapsMapper, spliceLaps } from "../../../helpers";
+import { pdfLapsMapper, spliceLaps } from "../../../helpers";
 import {
   mapper,
   resultsMapper,
@@ -16,14 +16,12 @@ export const getLiveResults = async () =>
         const formattedResponse = JSON.parse(response.html);
         const raceResults = resultsMapper(formattedResponse.B);
 
-        const fastestLaps = lapsMapper([...raceResults]);
+        // const fastestLaps = lapsMapper([...raceResults]);
 
         return {
           raceResults,
-          fastestLaps,
           session: formattedResponse.S,
           round: formattedResponse.T,
-          fastLapLeader: fastestLaps ? fastestLaps[0] : null,
         };
       }
     })
@@ -74,7 +72,6 @@ export default async (req, res) => {
       }
 
       if (!response.filter((res) => res.text !== null).length) {
-        console.log("IS EMPTY");
         res.status(200).send({
           ...currentRound,
           raceResults: {
@@ -100,15 +97,16 @@ export default async (req, res) => {
       const mainResultsSmall = response[1];
       const mainLapsBig = response[2];
       const mainLapsSmall = response[3];
-
       if (response && !response.error) {
         // BigBikeLapTimes
         const bigLapFormatted = mainLapsBig.text.split("\n");
         const bigBikeFastLaps = spliceLaps(bigLapFormatted);
+        const bigFastestLaps = pdfLapsMapper(bigBikeFastLaps);
 
         // SmallbikeLapTimes
         const smallLapFormatted = mainLapsSmall.text.split("\n");
         const smallBikeFastLaps = spliceLaps(smallLapFormatted);
+        const smallFastestLaps = pdfLapsMapper(smallBikeFastLaps);
 
         // 250 Main Race Results
         const smallFormattedResponse = mainResultsSmall.text.split("\n");
@@ -142,7 +140,16 @@ export default async (req, res) => {
           },
           session: liveResults.session,
           round: liveResults.round,
-          liveResults,
+          liveResults: {
+            ...liveResults,
+            fastestLaps: {
+              ...liveResults.fastestLaps,
+              bigFastLapLeader: bigFastestLaps ? bigFastestLaps[0] : null,
+              smallFastLapLeader: smallFastestLaps ? smallFastestLaps[0] : null,
+              big: bigFastestLaps,
+              small: smallFastestLaps,
+            },
+          },
         });
       }
     })
