@@ -2,13 +2,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
-import {
-  FastLaps,
-  LastRoundDetailed,
-  LeagueCard,
-  NoAccess,
-} from "../../components";
-import ModernButton from "../../components/Button/Button";
+import styled from "styled-components";
+import { NoAccess } from "../../components";
 import { apiType } from "../../constants";
 import {
   useAuth,
@@ -16,7 +11,6 @@ import {
   useCurrentUser,
   useRaceResults,
 } from "../../hooks";
-import { HomeStyled } from "../../styles";
 
 const Home = () => {
   const router = useRouter();
@@ -84,35 +78,72 @@ const Home = () => {
     return <NoAccess data={userWithNoAccess} />;
   }
 
-  const {
-    liveResults,
-    pdfResults,
-    week,
-    year,
-    message,
-  } = currentWeekWithLiveResults;
+  // const {
+  //   liveResults,
+  //   pdfResults,
+  //   week,
+  //   year,
+  //   message,
+  // } = currentWeekWithLiveResults;
+  console.log({ currentUser });
+  return <Presentation currentMode={currentMode} />;
+};
 
+export const Presentation = ({
+  currentMode,
+  userWithPicks,
+  lastRoundDetails,
+  pdfResults,
+  liveResults,
+}) => {
+  console.log({ currentMode, userWithPicks });
   return (
     <HomeStyled currentMode={currentMode}>
-      {user.email === process.env.ADMIN_USER &&
-      pdfResults &&
-      pdfResults.raceResults ? (
-        <ModernButton label="Assign Points" onClick={assignPoints} />
-      ) : null}
-      <LastRoundDetailed week={week} year={year} details={lastRoundDetails} />
-      {currentUser?.leaguePicks?.length &&
-        currentUser.leaguePicks.map((leaguePick) => {
-          return (
-            <LeagueCard
-              key={`${Object.keys(leaguePick)[0]}`}
-              leaguePicks={leaguePick}
-            />
-          );
-        })}
-      <FastLaps liveResults={liveResults} s />
-      {message && <div className="user-details">{message}</div>}
+      <TeamContainer>
+        {userWithPicks?.currentRound?.length ? (
+          userWithPicks.currentRound?.map()
+        ) : (
+          <div>You have no current picks</div>
+        )}
+      </TeamContainer>
+      {/* {user.email === process.env.ADMIN_USER &&
+    pdfResults &&
+    pdfResults.raceResults ? (
+      <ModernButton label="Assign Points" onClick={assignPoints} />
+    ) : null}
+    <LastRoundDetailed week={week} year={year} details={lastRoundDetails} />
+    {currentUser?.leaguePicks?.length &&
+      currentUser.leaguePicks.map((leaguePick) => {
+        return (
+          <LeagueCard
+            key={`${Object.keys(leaguePick)[0]}`}
+            leaguePicks={leaguePick}
+          />
+        );
+      })}
+    <FastLaps liveResults={liveResults} s />
+    {message && <div className="user-details">{message}</div>} */}
     </HomeStyled>
   );
 };
 
 export default Home;
+
+const TeamContainer = styled.div`
+  background-color: red;
+  padding: 1rem 1.5rem;
+  text-align: center;
+`;
+
+const HomeStyled = styled.div`
+  width: 100%;
+  // margin-top: 128px;
+  height: calc(100vh - 128px);
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-top: 9.5rem;
+  display: flex;
+  flex-direction: column;
+  // margin: 0;
+  // color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+`;
