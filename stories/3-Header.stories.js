@@ -1,23 +1,23 @@
-import React from 'react';
-import { Header } from '../components';
+import React from "react";
+import { Header } from "../components";
 
 export default {
-  title: 'Header',
+  title: "components/Header",
   component: Header,
 };
 
 const tabs = [
   {
-    title: 'Picks',
+    title: "Picks",
   },
   {
-    title: 'Results',
+    title: "Results",
   },
   {
-    title: 'Leagues',
+    title: "Leagues",
   },
   {
-    title: 'Contact',
+    title: "Contact",
   },
 ];
 

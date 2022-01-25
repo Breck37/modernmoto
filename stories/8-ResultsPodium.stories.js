@@ -1,54 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ResultsPodium } from '../components';
+import React from "react";
+import styled from "styled-components";
+import { ResultsPodium } from "../components";
 
 export default {
-  title: 'ResultsPodium',
+  title: "components/ResultsPodium",
   component: ResultsPodium,
 };
 
 const mockResultsPodium = [
   {
-    name: 'Bruce Pizza',
+    name: "Bruce Pizza",
     number: 22,
     position: 1,
-    bike: 'Yamaha',
+    bike: "Yamaha",
   },
   {
-    name: 'Brent Eckert',
+    name: "Brent Eckert",
     number: 37,
     position: 4,
-    bike: 'Husqvarna',
+    bike: "Husqvarna",
   },
   {
-    name: 'Ken Roczen',
+    name: "Ken Roczen",
     number: 94,
     position: 5,
-    bike: 'Honda',
+    bike: "Honda",
   },
   {
-    name: 'Eli Tomac',
+    name: "Eli Tomac",
     number: 1,
     position: 3,
-    bike: 'Kawasaki',
+    bike: "Kawasaki",
   },
   {
-    name: 'Justin Barcia',
+    name: "Justin Barcia",
     number: 51,
     position: 2,
-    bike: 'GasGas',
+    bike: "GasGas",
   },
   {
-    name: 'Bruce Pizza',
+    name: "Bruce Pizza",
     number: 22,
     position: 100,
-    bike: 'Suzuki',
+    bike: "Suzuki",
   },
   {
-    name: 'Pablo Taco',
-    number: '690',
+    name: "Pablo Taco",
+    number: "690",
     position: 10,
-    bike: 'KTM',
+    bike: "KTM",
   },
 ];
 

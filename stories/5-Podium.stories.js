@@ -1,24 +1,24 @@
-import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { Podium } from '../components';
+import React from "react";
+import { action } from "@storybook/addon-actions";
+import { Podium } from "../components";
 
 export default {
-  title: 'Podium',
+  title: "components/Podium",
   component: Podium,
 };
 
 const mockProps = {
   firstPlace: {
-    name: 'Brad',
+    name: "Brad",
   },
   secondPlace: {
-    name: 'Frank',
+    name: "Frank",
   },
   thirdPlace: {
-    name: 'Ralph',
+    name: "Ralph",
   },
 };
 
 export const DesktopPodium = () => (
-  <Podium title="Desktop" onClick={action('clicked Desktop')} {...mockProps} />
+  <Podium title="Desktop" onClick={action("clicked Desktop")} {...mockProps} />
 );
