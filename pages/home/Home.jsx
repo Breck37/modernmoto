@@ -1,16 +1,15 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { NoAccess } from "../../components";
-import { apiType } from "../../constants";
 import {
   useAuth,
   useCurrentMode,
   useCurrentUser,
   useRaceResults,
 } from "../../hooks";
+import CurrentPicks from "./components/CurrentPicks";
 
 const Home = () => {
   const router = useRouter();
@@ -18,7 +17,7 @@ const Home = () => {
   const { user, loading } = useAuth();
   const currentWeekWithLiveResults = useRaceResults();
   const { currentUser, isLoading, userWithNoAccess } = useCurrentUser(user);
-  const apiRequests = apiType[currentWeekWithLiveResults?.type];
+  // const apiRequests = apiType[currentWeekWithLiveResults?.type];
   useEffect(() => {
     if ((!user || !user.email) && !loading) {
       router.push("/login");
@@ -28,40 +27,40 @@ const Home = () => {
     if (!currentWeekWithLiveResults) return;
   }, [user]);
 
-  const lastRoundDetails = useMemo(() => {
-    if (currentUser && currentUser.currentRound.length) {
-      const roundToShow =
-        currentUser.leaguePicks[currentWeekWithLiveResults?.year][
-          currentWeekWithLiveResults?.type
-        ][`week${currentWeekWithLiveResults?.leagueRoundToShow}`];
+  // const lastRoundDetails = useMemo(() => {
+  //   if (currentUser && currentUser.currentRound.length) {
+  //     const roundToShow =
+  //       currentUser.leaguePicks[currentWeekWithLiveResults?.year][
+  //         currentWeekWithLiveResults?.type
+  //       ][`week${currentWeekWithLiveResults?.leagueRoundToShow}`];
 
-      if (!roundToShow) {
-        return currentUser.picks
-          .filter((pick) => pick.type === currentWeekWithLiveResults?.type)
-          .sort((a, b) => b.week - a.week)[0];
-      }
+  //     if (!roundToShow) {
+  //       return currentUser.picks
+  //         .filter((pick) => pick.type === currentWeekWithLiveResults?.type)
+  //         .sort((a, b) => b.week - a.week)[0];
+  //     }
 
-      return roundToShow.find((pick) => pick.email === currentUser.email);
-    }
+  //     return roundToShow.find((pick) => pick.email === currentUser.email);
+  //   }
 
-    return null;
-  }, [currentUser]);
+  //   return null;
+  // }, [currentUser]);
 
-  const assignPoints = () => {
-    axios
-      .post(
-        `${apiRequests.assignPoints}?week=${currentWeekWithLiveResults?.week}&type=${currentWeekWithLiveResults?.type}&year=${currentWeekWithLiveResults?.year}`,
-        {
-          raceResults: {
-            ...currentWeekWithLiveResults?.pdfResults,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("ASSIGN POINTS RESPONSE", { res });
-      })
-      .catch((e) => console.warn("ERROR", { e }));
-  };
+  // const assignPoints = () => {
+  //   axios
+  //     .post(
+  //       `${apiRequests.assignPoints}?week=${currentWeekWithLiveResults?.week}&type=${currentWeekWithLiveResults?.type}&year=${currentWeekWithLiveResults?.year}`,
+  //       {
+  //         raceResults: {
+  //           ...currentWeekWithLiveResults?.pdfResults,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       console.log("ASSIGN POINTS RESPONSE", { res });
+  //     })
+  //     .catch((e) => console.warn("ERROR", { e }));
+  // };
 
   if (
     loading ||
@@ -92,19 +91,15 @@ const Home = () => {
 export const Presentation = ({
   currentMode,
   userWithPicks,
-  lastRoundDetails,
-  pdfResults,
-  liveResults,
+  // lastRoundDetails,
+  // pdfResults,
+  // liveResults,
 }) => {
   console.log({ currentMode, userWithPicks });
   return (
     <HomeStyled currentMode={currentMode}>
       <TeamContainer>
-        {userWithPicks?.currentRound?.length ? (
-          userWithPicks.currentRound?.map()
-        ) : (
-          <div>You have no current picks</div>
-        )}
+        <CurrentPicks picks={userWithPicks.currentRound} />
       </TeamContainer>
       {/* {user.email === process.env.ADMIN_USER &&
     pdfResults &&

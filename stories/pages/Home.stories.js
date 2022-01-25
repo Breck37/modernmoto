@@ -7,7 +7,12 @@ export default {
   component: Presentation,
 };
 
-export const Primary = (args) => <Presentation {...args} />;
+export const Primary = (args) => (
+  <>
+    <div>Header Goes Here</div>
+    <Presentation {...args} />
+  </>
+);
 Primary.args = {
   currentMode: 0,
   userWithPicks: mockUserWithPicks,
