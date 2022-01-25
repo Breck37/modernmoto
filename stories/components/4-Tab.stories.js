@@ -1,6 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
-import { Tab } from "../components";
+import { Tab } from "../../components";
 
 export default {
   title: "components/Tab",

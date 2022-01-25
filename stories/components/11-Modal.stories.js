@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "../components";
+import { Modal } from "../../components";
 
 export default {
   title: "components/Modal",

@@ -1,13 +1,4 @@
-import React from "react";
-import styled from "styled-components";
-import { ResultsPodium } from "../components";
-
-export default {
-  title: "components/ResultsPodium",
-  component: ResultsPodium,
-};
-
-const mockResultsPodium = [
+export const mockFrontPlateRiders = [
   {
     name: "Bruce Pizza",
     number: 22,
@@ -46,24 +37,8 @@ const mockResultsPodium = [
   },
   {
     name: "Pablo Taco",
-    number: "690",
+    number: "69",
     position: 10,
     bike: "KTM",
   },
 ];
-
-export const DesktopResultsPodium = () => {
-  return <ResultsPodium riders={mockResultsPodium} />;
-};
-
-const MobileContainer = styled.div`
-  width: 350px;
-`;
-
-export const MobileResultsPodium = () => {
-  return (
-    <MobileContainer>
-      <ResultsPodium riders={mockResultsPodium} small />
-    </MobileContainer>
-  );
-};
