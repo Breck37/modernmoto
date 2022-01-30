@@ -1,7 +1,7 @@
 import React from "react";
 
-const CurrentPicks = ({ currentRound }) => {
-  console.log({ currentRound });
+const CurrentPicks = ({ picks }) => {
+  console.log({ picks });
   return <Presentation />;
 };
 
