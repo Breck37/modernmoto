@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
 import { Header } from "../components";
 import defaultTabs from "../constants/defaultTabs";
 import {
@@ -58,7 +59,9 @@ function ModernMotoFantasy({ Component, pageProps }) {
               user={user}
             />
           )}
-          <Component {...pageProps} user={user} loading={loading} />
+          <Container>
+            <Component {...pageProps} user={user} loading={loading} />
+          </Container>
         </CurrentModeContext.Provider>
       </CurrentUserContextProvider>
     </AppStyled>
@@ -66,3 +69,13 @@ function ModernMotoFantasy({ Component, pageProps }) {
 }
 
 export default ModernMotoFantasy;
+
+const Container = styled.div`
+  @media (min-width: 501px) {
+    padding-top: 48px;
+  }
+
+  @media (min-width: 800px) {
+    padding-top: 160px;
+  }
+`;
