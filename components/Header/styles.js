@@ -1,7 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import {
+  MID_PURPLE,
+  MODERN_AQUA,
+  MODERN_DARK,
+  MODERN_WHITE,
+} from "../../styles/colors";
 
 export default styled.div`
   max-width: 100vw;
+  height: 128px;
   position: absolute;
   top: 0;
   right: 0;
@@ -14,8 +21,10 @@ export default styled.div`
 
   .mode-container {
     height: 32px;
+    min-height: 32px;
     padding-right: 5%;
-    background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
+    background-color: ${({ currentMode }) =>
+      currentMode ? MODERN_WHITE : MODERN_DARK};
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -25,7 +34,7 @@ export default styled.div`
       background: none;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: ${({ currentMode }) => (currentMode ? '#28282' : 'aqua')};
+      color: ${({ currentMode }) => (currentMode ? MODERN_DARK : MODERN_AQUA)};
       border: none;
       cursor: pointer;
       outline: inherit;
@@ -47,8 +56,9 @@ export default styled.div`
       margin-top: -32px;
       cursor: pointer;
       width: 100%;
-      color: aqua;
-      background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#282828')};
+      color: ${MODERN_AQUA};
+      background-color: ${({ currentMode }) =>
+        currentMode ? MODERN_WHITE : MODERN_DARK};
       height: 128px;
       display: inherit;
       align-items: center;
@@ -58,23 +68,15 @@ export default styled.div`
       clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
 
       > span {
-        margin-right: 32px;
         letter-spacing: 2px;
-        text-shadow: 0 0 1px aqua, 0 1px 1px #520099, 0 2px 1px #520099,
-          1px 1px 1px #520099, 1px 2px 1px #520099, 1px 3px 1px #520099,
-          2px 1px 1px #520099, 2px 2px 1px #520099, 2px 3px 1px #520099;
+        text-shadow: 0 0 1px aqua, 0 1px 1px ${MID_PURPLE}, 0 2px 1px ${MID_PURPLE},
+          1px 1px 1px ${MID_PURPLE}, 1px 2px 1px ${MID_PURPLE}, 1px 3px 1px ${MID_PURPLE},
+          2px 1px 1px ${MID_PURPLE}, 2px 2px 1px ${MID_PURPLE}, 2px 3px 1px ${MID_PURPLE};
       }
-      // > span {
-      //   margin-right: 32px;
-      //   letter-spacing: 2px;
-      //   text-shadow: 0 0 1px aqua, 0 1px 1px #009999, 0 2px 1px #009999,
-      //     1px 1px 1px #009999, 1px 2px 1px #009999, 1px 3px 1px #009999,
-      //     2px 1px 1px #009999, 2px 2px 1px #009999, 2px 3px 1px #009999;
-      // }
     }
 
     .icon-wrap {
-      background-color: ${({ currentMode }) => (currentMode ? '#fff' : '#FFF')};
+      background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#FFF")};
     }
   }
 
@@ -113,7 +115,7 @@ export default styled.div`
       align-items: center;
       font-family: Arial, serif;
       height: 50%;
-      color: "#282828";
+      color: ${MODERN_DARK};
 
       &:hover {
         font-size: 24px;
@@ -169,17 +171,19 @@ export default styled.div`
     .logo-container {
       width: 100%;
       animation: slide100 1.5s;
+      display: flex;
+      align-items: center;
     }
     .tabs {
-      display: ${({ showMobileTabs }) => (showMobileTabs ? 'block' : 'none')};
+      display: ${({ showMobileTabs }) => (showMobileTabs ? "block" : "none")};
       flex-direction: column;
-      width: 200px;
+      width: 100%;
       z-index: 10000;
       margin-left: 0;
-      left: calc(100% - 200px);
-      top: 128px;
-      background-color: aqua;      
-      height: 220px;      
+      top: 160px;
+      background-color: ${({ currentMode }) =>
+        currentMode ? MODERN_WHITE : MODERN_AQUA};      
+      height: ${({ tabLength }) => tabLength * 56}px;      
       filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.3));
       animation: unveil 2.4s;
       transition: all 2.4s linear;
@@ -190,17 +194,19 @@ export default styled.div`
       > .tab {
         height: 48px;
         opacity: 1;
-        color: #282828;
+        color: ${({ currentMode }) => (currentMode ? MID_PURPLE : MODERN_DARK)};
         border: none !important;
         padding: 4px 0;
         animation: showTabs 2.4s;
         transition: height: 2.4s linear;
+        font-weight: 500;
       }
     }
     .logo-wrap {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
       justify-content: space-between;
       position: relative;
+      margin-top: 0 !important;
     }
     .mode-container {
       padding-right: 18px;
@@ -209,18 +215,24 @@ export default styled.div`
       display: inline-block;
       position: absolute;
       right: 24px;
-      top: 41%;
-      color: ${({ currentMode }) => (currentMode ? 'aqua' : '#282828')};
+      top: 50px;
+      color: ${({ currentMode }) => (currentMode ? MODERN_AQUA : MODERN_DARK)};
     }
   }
 
   @media (max-width: 500px) {
     .logo-wrap {
       font-size: 36px !important;
+      height: 100% !important;
     }
     .tabs {
       left: 0;
       width: 100%;
+      top: 128px;
+    }
+
+    .menu {
+      top: 33px;
     }
   }
 
@@ -231,7 +243,7 @@ export default styled.div`
     }
     100 {
       display: block;
-      height: 220px;
+      height: ${({ tabLength }) => tabLength * 56}px;
     }
   }
   @keyframes showTabs {
