@@ -69,7 +69,6 @@ const sanitizeBestLaps = (raceResults) => {
 
 export const spliceLaps = (lapArray) => {
   const finalResults = [];
-  console.log(lapArray);
   lapArray
     .slice(8, lapArray.length - 3)
     .map(trim)
