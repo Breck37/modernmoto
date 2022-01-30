@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export default (req, res) => {
-  const { email, week, type } = req.query;
+  const { email, week, type, year } = req.query;
   if (!email) {
     res.status(200).send({ success: false, error: "No email provided" });
     return;
   }
 
-  let queryString = `?email=${email}&week=${week}&type=${type}`;
+  let queryString = `?email=${email}&week=${week}&type=${type}&year=${year}`;
 
   return axios
     .get(`${process.env.API_URL}/get-user${queryString}`)

@@ -16,7 +16,7 @@ export const useCurrentUser = (user) => {
       setIsLoading(true);
       axios
         .get(
-          `${apiRequests?.getUser}/${user?.email}?week=${currentRound.week}&type=${currentRound.type}`
+          `${apiRequests?.getUser}/${user?.email}?week=${currentRound.week}&type=${currentRound.type}&year=${currentRound.year}`
         )
         .then(({ data }) => {
           setIsLoading(false);
