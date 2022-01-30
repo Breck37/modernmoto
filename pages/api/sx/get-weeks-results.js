@@ -93,63 +93,55 @@ export default async (req, res) => {
         return;
       }
 
+      const raceResults = {
+        250: {},
+        450: {},
+      };
+
       const mainResultsBig = response[0];
       const mainResultsSmall = response[1];
       const mainLapsBig = response[2];
       const mainLapsSmall = response[3];
+
       if (response && !response.error) {
-        // BigBikeLapTimes
+        // 450 Lap times
         const bigLapFormatted = mainLapsBig.text.split("\n");
         const bigBikeFastLaps = spliceLaps(bigLapFormatted);
-        const bigFastestLaps = pdfLapsMapper(bigBikeFastLaps);
+        raceResults["450"].fastestLaps = pdfLapsMapper(bigBikeFastLaps);
+        raceResults["450"].fastLapLeader = raceResults["450"].fastestLaps
+          ? raceResults["450"].fastestLaps[0]
+          : null;
 
-        // SmallbikeLapTimes
+        // 250 Lap times
         const smallLapFormatted = mainLapsSmall.text.split("\n");
         const smallBikeFastLaps = spliceLaps(smallLapFormatted);
-        const smallFastestLaps = pdfLapsMapper(smallBikeFastLaps);
+        raceResults["250"].fastestLaps = pdfLapsMapper(smallBikeFastLaps);
+        raceResults["250"].fastLapLeader = raceResults["250"].fastestLaps
+          ? raceResults["250"].fastestLaps[0]
+          : null;
 
         // 250 Main Race Results
         const smallFormattedResponse = mainResultsSmall.text.split("\n");
-        const smallRaceResults = mapper(
+        raceResults["250"].raceResults = mapper(
           spliceResults([...smallFormattedResponse], 14)
         );
-        const smallSeasonResults = seasonMapper(
+        raceResults["250"].seasonResults = seasonMapper(
           spliceSeasonResults(smallFormattedResponse)
         );
 
         // 450 Main Race Results
         const formattedResponse = mainResultsBig.text.split("\n");
-        const raceResults = mapper(spliceResults([...formattedResponse], 14));
-        const seasonResults = seasonMapper(
+        raceResults["450"].raceResults = mapper(
+          spliceResults([...formattedResponse], 13)
+        );
+        raceResults["450"].seasonResults = seasonMapper(
           spliceSeasonResults(formattedResponse)
         );
 
         res.status(200).send({
           ...currentRound,
-          raceResults: {
-            big: raceResults,
-            small: smallRaceResults,
-          },
-          seasonResults: {
-            big: seasonResults,
-            small: smallSeasonResults,
-          },
-          lapTimes: {
-            big: bigBikeFastLaps,
-            small: smallBikeFastLaps,
-          },
-          session: liveResults.session,
-          round: liveResults.round,
-          liveResults: {
-            ...liveResults,
-            fastestLaps: {
-              ...liveResults.fastestLaps,
-              bigFastLapLeader: bigFastestLaps ? bigFastestLaps[0] : null,
-              smallFastLapLeader: smallFastestLaps ? smallFastestLaps[0] : null,
-              big: bigFastestLaps,
-              small: smallFastestLaps,
-            },
-          },
+          liveResults,
+          ...raceResults,
         });
       }
     })
