@@ -6,7 +6,6 @@ export default styled.div`
   width: 100vw;
   overflow: hidden;
   height: calc(100vh - 128px);
-  margin-top: 128px;
   overflow-y: scroll;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
