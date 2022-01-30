@@ -1,28 +1,31 @@
 const correctKeys = {
-  A: 'position',
-  BL: 'bestLap',
-  F: 'riderName',
-  H: 'hometown',
-  L: 'currentLap',
-  LL: 'lastLap',
-  N: 'number',
-  T: 'team',
-  V: 'bike',
+  A: "position",
+  BL: "bestLap",
+  F: "riderName",
+  H: "hometown",
+  L: "currentLap",
+  LL: "lastLap",
+  N: "number",
+  T: "team",
+  V: "bike",
 };
 
-module.exports = (riderArray) => riderArray
-  .map((riderObject) => Object.entries(riderObject).reduce((acc, curr) => {
-    if (correctKeys[curr[0]]) {
-      const key = correctKeys[curr[0]];
-      return {
-        ...acc,
-        [key]: curr[1],
-      };
-    }
-    return acc;
-  }, {}))
-  .sort((a, b) => a.position - b.position)
-  .map((r) => ({ ...r, riderName: r.riderName.trim() }));
+module.exports = (riderArray) =>
+  riderArray
+    .map((riderObject) =>
+      Object.entries(riderObject).reduce((acc, curr) => {
+        if (correctKeys[curr[0]]) {
+          const key = correctKeys[curr[0]];
+          return {
+            ...acc,
+            [key]: typeof curr[1] === "string" ? curr[1].trim() : curr[1],
+          };
+        }
+        return acc;
+      }, {})
+    )
+    .sort((a, b) => a.position - b.position)
+    .map((r) => ({ ...r, riderName: r.riderName.trim() }));
 
 /// /////// EXAMPLE RESPONSE //////////////////////
 // A: 1 "Position"

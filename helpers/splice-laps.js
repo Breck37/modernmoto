@@ -14,6 +14,7 @@ const hasAllAttributes = (rider) =>
 const filter = (string) => {
   return (
     string &&
+    string !== "1--.---" &&
     !string.includes("450SX") &&
     !string.includes("250SX") &&
     !string.includes("INDIVIDUAL") &&
@@ -24,7 +25,7 @@ const filter = (string) => {
     !string.includes(" - ") &&
     !string.includes("MIN") &&
     !string.includes("MAX") &&
-    !string.includes("AVG") &&
+    string.indexOf(":") < 2 &&
     string.length > 1 &&
     string.trim().replace(/\s/g, "").slice(-1) !== "I"
   );
@@ -39,10 +40,13 @@ const filter = (string) => {
 // };
 
 const cleanse = ({ times, ...rest }) => {
-  const [avg, max, min] = times.slice(times.length - 3);
-  const cleansed = times.slice(1, times.length - 3).map((time, i) => {
-    return i <= 8 ? time.slice(1) : time.slice(2);
+  const cleansed = times.map((time, i) => {
+    const isStat = times.length - i <= 3;
+    if (isStat) return time;
+    const isSingleDigit = i <= 7;
+    return isSingleDigit ? time.slice(1) : time.slice(2);
   });
+  const [avg, max, min] = cleansed.slice(times.length - 3);
 
   return {
     ...rest,
@@ -65,13 +69,17 @@ const sanitizeBestLaps = (raceResults) => {
 
 export const spliceLaps = (lapArray) => {
   const finalResults = [];
-
+  console.log(lapArray);
   lapArray
-    .splice(9)
-    .filter(filter)
+    .slice(8, lapArray.length - 3)
     .map(trim)
+    .filter(filter)
     .reduce(
       (currentRider, entry) => {
+        if (entry === "AVG") {
+          finalResults.push(currentRider);
+          return { times: [] };
+        }
         if (testRiderNumber(entry) && !currentRider.number) {
           currentRider.number = entry;
           return currentRider;
@@ -81,7 +89,11 @@ export const spliceLaps = (lapArray) => {
         } else if (testSpace(entry) && !currentRider.name) {
           currentRider.name = entry;
           return currentRider;
-        } else if (!isNaN(parseInt(entry)) && !testRiderNumber(entry)) {
+        } else if (
+          !isNaN(parseInt(entry)) &&
+          !testRiderNumber(entry) &&
+          currentRider?.times?.length < 30
+        ) {
           currentRider.times = [...currentRider.times, entry];
           return currentRider;
         } else if (hasAllAttributes(currentRider)) {
