@@ -47,10 +47,6 @@ function ModernMotoFantasy({ Component, pageProps }) {
         <title>ModernMotoFantasy</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bangers&family=Cinzel:wght@700&family=Kaushan+Script&family=Permanent+Marker&family=Righteous&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <CurrentUserContextProvider>
         <CurrentModeContext.Provider value={currentMode}>

@@ -61,7 +61,7 @@ const Presentation = ({
         <ModernTabs
           onChange={handleTabChange}
           value={currentTab}
-          currentMode={currentMode}
+          currentmode={currentMode}
           className={
             currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
           }
