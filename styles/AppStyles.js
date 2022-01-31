@@ -14,5 +14,5 @@ export default styled.div`
   align-items: center;
   box-sizing: border-box;
   background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
-  font-family: "Nunito sans";
+  font-family: "'Nunito Sans', -apple-system, sans-serif";
 `;

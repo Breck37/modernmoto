@@ -93,28 +93,6 @@ const Presentation = ({
     );
   }
 
-  // const renderPicks = (picks) => {
-  //   if (!picks) {
-  //     return (
-  //       <span>{`You have ${
-  //         !currentTab ? "250" : "450"
-  //       } picks for the current round`}</span>
-  //     );
-  //   }
-
-  //   return smallBikePicks.map((pick) => {
-  //     return (
-  //       <Pick key={pick.position} currentMode={currentMode}>
-  //         <div>{formatPickPosition(pick.position)}</div>
-  //         <div style={{ letterSpacing: "12px", textAlign: "center" }}>
-  //           {pick.riderName}
-  //         </div>
-  //         <div className="points">Pts: {pick.points}</div>
-  //       </Pick>
-  //     );
-  //   });
-  // };
-
   return (
     <Container currentMode={currentMode}>
       <Paper
@@ -133,20 +111,6 @@ const Presentation = ({
           <Tab label="450" />
         </ModernTabs>
       </Paper>
-      {/* {currentTab === 1 ? (
-        <PicksContainer currentMode={currentMode}>
-          <h4>450 PICKS</h4>
-          <div className="picks">{renderBigBikePicks()}</div>
-        </PicksContainer>
-      ) : null}
-      {currentTab === 0 ? (
-        <PicksContainer currentMode={currentMode}>
-          <h4>250 PICKS</h4>
-          <div className="picks">
-            {renderPicks(!currentTab ? smallBikePicks : bigBikePicks)}
-          </div>
-        </PicksContainer>
-      ) : null} */}
     </Container>
   );
 };
@@ -161,39 +125,6 @@ const Container = styled.div`
     margin-top: 1.5rem;
   }
 `;
-
-// const PicksContainer = styled.div`
-//   padding: 1rem;
-//   margin: 0 1.5rem;
-//   border: 1px solid black;
-//   border-radius: 0.5rem;
-//   color: ${({ currentMode }) => (currentMode ? MODERN_DARK : MODERN_AQUA)};
-
-//   .picks {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: space-around;
-//     flex-wrap: wrap;
-//   }
-// `;
-
-// const Pick = styled.div`
-//   width: 100%;
-//   margin-bottom: 0.5rem;
-
-//   hr {
-//     color: ${MODERN_DARK};
-//   }
-//   // min-width: 100px;
-//   // width: 103px;
-//   // align-items: center;
-//   // justify-content: center;
-//   // margin-top: 0.5rem;
-//   color: ${({ currentMode }) => (currentMode ? MODERN_AQUA : MODERN_DARK)};
-//   background-color: ${({ currentMode }) =>
-//     currentMode ? MODERN_DARK : MODERN_AQUA};
-// `;
 
 const ModernTabs = styled(Tabs)({
   "& .MuiTabs-indicator": {
