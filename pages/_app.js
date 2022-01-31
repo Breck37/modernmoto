@@ -71,11 +71,10 @@ function ModernMotoFantasy({ Component, pageProps }) {
 export default ModernMotoFantasy;
 
 const Container = styled.div`
-  @media (min-width: 501px) {
-    padding-top: 48px;
-  }
+  width: 100%;
+  padding-top: 128px;
 
-  @media (min-width: 800px) {
-    padding-top: 160px;
+  @media (min-width: 500px) {
+    padding-top: 176px;
   }
 `;

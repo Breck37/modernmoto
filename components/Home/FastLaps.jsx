@@ -1,75 +1,44 @@
-import { Paper, Tab, Tabs } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useCurrentMode } from "../../hooks";
+import { MODERN_AQUA, MODERN_DARK } from "../../styles/colors";
 
-const useStyles = makeStyles(() => ({
-  primary: {
-    backgroundColor: "#fff",
-    color: "#454dcc",
-  },
-  secondary: {
-    backgroundColor: "#282828",
-    color: "#fff",
-  },
-  indicatorPrimary: {
-    color: "#282828",
-  },
-  indicatorSecondary: {
-    color: "aqua",
-  },
-}));
-
-export const FastLaps = ({ liveResults }) => {
-  const [currentTab, setCurrentTab] = useState(0);
+export const FastLaps = ({ lapResults, currentTab }) => {
   const { currentMode } = useCurrentMode();
-  const classes = useStyles();
   //const apiRequests =
   // scheduledData[currentRound.type][currentRound.year][currentRound.round];
 
-  const handleTabChange = (_, newValue) => {
-    setCurrentTab(newValue);
-  };
+  if (!lapResults) {
+    <Container currentMode={currentMode}>
+      <span>No laps to display</span>
+    </Container>;
+  }
+
+  const leaderToDisplay = React.useMemo(
+    () =>
+      currentTab
+        ? lapResults["450"]?.fastLapLeader
+        : lapResults["250"]?.fastestLaps,
+    [currentTab, lapResults]
+  );
+
+  console.log({ leaderToDisplay, lapResults });
 
   return (
-    <Presentation
-      liveResults={liveResults?.fastestLaps}
-      handleTabChange={handleTabChange}
-      currentTab={currentTab}
-      currentMode={currentMode}
-      classes={classes}
-    />
+    <Presentation leaderToDisplay={leaderToDisplay} currentMode={currentMode} />
   );
 };
 
-const Presentation = ({
-  liveResults,
-  handleTabChange,
-  currentTab,
-  currentMode,
-  classes,
-}) => {
-  const lapsToDisplay = currentTab ? liveResults?.big : liveResults?.small;
-
+const Presentation = ({ leaderToDisplay, currentMode }) => {
+  if (!leaderToDisplay) {
+    return (
+      <Container currentMode={currentMode}>
+        <span>No laps to display</span>
+      </Container>
+    );
+  }
   return (
-    <Wrap>
-      <Paper
-        square
-        className={currentMode ? classes.primary : classes.secondary}
-      >
-        <ModernTabs
-          onChange={handleTabChange}
-          value={currentTab}
-          currentmode={currentMode}
-          className={
-            currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
-          }
-        >
-          <Tab label="250" />
-          <Tab label="450" />
-        </ModernTabs>
-      </Paper>
+    <Container currentMode={currentMode}>
       {/* // <div className="marquee">
      //   <div className="animation-container">
      //     <span>FAST LAPS</span>
@@ -94,8 +63,8 @@ const Presentation = ({
            //   </div>
          // </div> */}
       <div className="mobile-fast-laps">
-        <h3>Top 3 LapTimes</h3>
-        {lapsToDisplay
+        {/* <h3>Top 3 LapTimes</h3> */}
+        {/* {lapsToDisplay
           ?.slice(0, 3)
           .map(({ riderName, bestLap, bike }, index) => {
             return (
@@ -110,35 +79,34 @@ const Presentation = ({
                 <div>{bestLap}</div>
               </div>
             );
-          })}
+          })} */}
       </div>
-    </Wrap>
+    </Container>
   );
 };
 
-const Wrap = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  '& .MuiPaper-root': {
+  "& .muipaper-root": {
     background-color: ${({ currentMode }) =>
       currentMode ? "#fff" : "#282828"} !important;
   }
 
-  '& .PrivateTabIndicator-root-1': {
+  "& .privatetabindicator-root-1": {
     background-color: ${({ currentMode }) =>
       currentMode ? "#454dcc" : "aqua"} !important;
   }
 
-  '> div:first-child': {
+  "> div:first-child": {
     width: 20rem;
-  },
-`;
+  }
 
-const ModernTabs = styled(Tabs)({
-  "& .MuiTabs-indicator": {
-    backgroundColor: "aqua",
-  },
-});
+  ,
+  .mobile-fast-laps {
+    color: ${({ currentMode }) => (currentMode ? MODERN_DARK : MODERN_AQUA)};
+  }
+`;

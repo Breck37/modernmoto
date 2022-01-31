@@ -216,14 +216,14 @@ export default styled.div`
       position: absolute;
       right: 24px;
       top: 50px;
-      color: ${({ currentMode }) => (currentMode ? MODERN_AQUA : MODERN_DARK)};
+      color: ${MODERN_AQUA};
     }
   }
 
   @media (max-width: 500px) {
     .logo-wrap {
       font-size: 36px !important;
-      height: 100% !important;
+      height: 96px !important;
     }
     .tabs {
       left: 0;

@@ -2,7 +2,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { NoAccess } from "../../components";
+import { FastLaps, NoAccess } from "../../components";
 import {
   useAuth,
   useCurrentMode,
@@ -70,11 +70,19 @@ const Home = () => {
     !user ||
     !currentUser
   ) {
-    return <CircularProgress />;
+    return (
+      <HomeStyled currentMode={currentMode}>
+        <CircularProgress />
+      </HomeStyled>
+    );
   }
 
   if (userWithNoAccess) {
-    return <NoAccess data={userWithNoAccess} />;
+    return (
+      <HomeStyled currentMode={currentMode}>
+        <NoAccess data={userWithNoAccess} />
+      </HomeStyled>
+    );
   }
 
   // const {
@@ -85,22 +93,32 @@ const Home = () => {
   //   message,
   // } = currentWeekWithLiveResults;
   console.log({ currentUser });
-  return <Presentation currentMode={currentMode} />;
+  return (
+    <Presentation
+      currentMode={currentMode}
+      userWithPicks={currentUser}
+      results={currentWeekWithLiveResults}
+    />
+  );
 };
 
 export const Presentation = ({
   currentMode,
   userWithPicks,
+  results,
   // lastRoundDetails,
   // pdfResults,
   // liveResults,
 }) => {
-  console.log({ currentMode, userWithPicks });
+  console.log({ currentMode, userWithPicks, results });
   return (
     <HomeStyled currentMode={currentMode}>
       <TeamContainer>
-        <CurrentPicks picks={userWithPicks.currentRound} />
+        <CurrentPicks picks={userWithPicks?.currentRound} />
       </TeamContainer>
+      <RightContainer>
+        <FastLaps lapResults={results} />
+      </RightContainer>
       {/* {user.email === process.env.ADMIN_USER &&
     pdfResults &&
     pdfResults.raceResults ? (
@@ -116,7 +134,6 @@ export const Presentation = ({
           />
         );
       })}
-    <FastLaps liveResults={liveResults} s />
     {message && <div className="user-details">{message}</div>} */}
     </HomeStyled>
   );
@@ -124,21 +141,28 @@ export const Presentation = ({
 
 export default Home;
 
-const TeamContainer = styled.div`
-  background-color: red;
+const HomeStyled = styled.div`
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 990px) {
+    flex-direction: row;
+    padding: 0 2rem;
+  }
+`;
+
+const TeamContainer = styled.section`
+  width: 100%;
+  flex: 1;
   padding: 1rem 1.5rem;
   text-align: center;
 `;
 
-const HomeStyled = styled.div`
-  width: 100%;
-  // margin-top: 128px;
-  height: calc(100vh - 128px);
-  overflow: hidden;
-  overflow-y: scroll;
-  padding-top: 9.5rem;
-  display: flex;
-  flex-direction: column;
-  // margin: 0;
-  // color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+const RightContainer = styled.section`
+  flex: 1;
 `;
