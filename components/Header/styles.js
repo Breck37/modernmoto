@@ -223,7 +223,7 @@ export default styled.div`
   @media (max-width: 500px) {
     .logo-wrap {
       font-size: 36px !important;
-      height: 100% !important;
+      height: 96px !important;
     }
     .tabs {
       left: 0;
