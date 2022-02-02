@@ -6,37 +6,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 1,
         points: 5,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 2,
         points: 0,
       },
       {
-        riderName: "Chase Sexton",
+        name: "Chase Sexton",
         position: 3,
         points: 5,
       },
       {
-        riderName: "Ken Roczen",
+        name: "Ken Roczen",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Jason Anderson",
+        name: "Jason Anderson",
         position: 5,
         points: 5,
       },
       {
-        riderName: "Joey Savatgy",
+        name: "Joey Savatgy",
         position: 10,
         points: 20,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 100,
         points: 0,
       },
@@ -56,37 +56,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 1,
         points: 5,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 2,
         points: 0,
       },
       {
-        riderName: "Ken Roczen",
+        name: "Ken Roczen",
         position: 3,
         points: 5,
       },
       {
-        riderName: "Chase Sexton",
+        name: "Chase Sexton",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Jason Anderson",
+        name: "Jason Anderson",
         position: 5,
         points: 5,
       },
       {
-        riderName: "Joey Savatgy",
+        name: "Joey Savatgy",
         position: 10,
         points: 20,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 100,
         points: 0,
       },
@@ -106,37 +106,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 1,
         points: 5,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 2,
         points: 0,
       },
       {
-        riderName: "Aaron Plessinger",
+        name: "Aaron Plessinger",
         position: 3,
         points: 0,
       },
       {
-        riderName: "Chase Sexton",
+        name: "Chase Sexton",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Justin Barcia",
+        name: "Justin Barcia",
         position: 5,
         points: 5,
       },
       {
-        riderName: "Joey Savatgy",
+        name: "Joey Savatgy",
         position: 10,
         points: 20,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 100,
         points: 0,
       },
@@ -156,37 +156,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Ken Roczen",
+        name: "Ken Roczen",
         position: 1,
         points: 10,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 2,
         points: 0,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 3,
         points: 5,
       },
       {
-        riderName: "Jason Anderson",
+        name: "Jason Anderson",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Chase Sexton",
+        name: "Chase Sexton",
         position: 5,
         points: 5,
       },
       {
-        riderName: "Dylan Ferrandis",
+        name: "Dylan Ferrandis",
         position: 10,
         points: 0,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 100,
         points: 0,
       },
@@ -206,37 +206,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 1,
         points: 0,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 2,
         points: 5,
       },
       {
-        riderName: "Jason Anderson",
+        name: "Jason Anderson",
         position: 3,
         points: 10,
       },
       {
-        riderName: "Ken Roczen",
+        name: "Ken Roczen",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Aaron Plessinger",
+        name: "Aaron Plessinger",
         position: 5,
         points: 0,
       },
       {
-        riderName: "Martin Davalos",
+        name: "Martin Davalos",
         position: 10,
         points: 0,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 100,
         points: 0,
       },
@@ -256,37 +256,37 @@ export const mockPicks = [
     year: 2021,
     bigBikePicks: [
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 1,
         points: 5,
       },
       {
-        riderName: "Cooper Webb",
+        name: "Cooper Webb",
         position: 2,
         points: 0,
       },
       {
-        riderName: "Chase Sexton",
+        name: "Chase Sexton",
         position: 3,
         points: 5,
       },
       {
-        riderName: "Jason Anderson",
+        name: "Jason Anderson",
         position: 4,
         points: 5,
       },
       {
-        riderName: "Ken Roczen",
+        name: "Ken Roczen",
         position: 5,
         points: 5,
       },
       {
-        riderName: "Malcolm Stewart",
+        name: "Malcolm Stewart",
         position: 10,
         points: 0,
       },
       {
-        riderName: "Eli Tomac",
+        name: "Eli Tomac",
         position: 100,
         points: 0,
       },

@@ -1,15 +1,15 @@
 const correctKeys = {
-  A: 'position',
-  BL: 'bestLap',
-  F: 'riderName',
-  L: 'currentLap',
-  LL: 'lastLap',
-  N: 'number',
-  T: 'hometown',
-  V: 'bike',
-  D: 'diff',
-  G: 'gap',
-  S: 'status',
+  A: "position",
+  BL: "bestLap",
+  F: "name",
+  L: "currentLap",
+  LL: "lastLap",
+  N: "number",
+  T: "hometown",
+  V: "bike",
+  D: "diff",
+  G: "gap",
+  S: "status",
 };
 
 module.exports = (riderArray) => {
@@ -29,7 +29,7 @@ module.exports = (riderArray) => {
     .sort((a, b) => {
       return a.position - b.position;
     })
-    .map((r) => ({ ...r, riderName: r.riderName.trim(), bike: r.bike.split(' ')[0] }));
+    .map((r) => ({ ...r, name: r.name.trim(), bike: r.bike.split(" ")[0] }));
 };
 
 ////////// EXAMPLE RESPONSE //////////////////////

@@ -74,10 +74,10 @@ const Presentation = ({
      //   <div className="animation-container">
      //     <span>FAST LAPS</span>
      //     {liveResults.fastestLaps.map(
-       //       ({ riderName, bestLap, bike }, index) => {
+       //       ({ name, bestLap, bike }, index) => {
          //         return (
            //           <div
-           //             key={`${riderName}-fast-lap`}
+           //             key={`${name}-fast-lap`}
            //             className={`fast-lap ${index}`}
            //           >
            //             <img
@@ -85,7 +85,7 @@ const Presentation = ({
            //               alt=""
            //               className="rider-image"
            //             />
-           //             <div>{riderName}</div>
+           //             <div>{name}</div>
            //             <div>{bestLap}</div>
            //           </div>
            //         );
@@ -95,22 +95,15 @@ const Presentation = ({
          // </div> */}
       <div className="mobile-fast-laps">
         <h3>Top 3 LapTimes</h3>
-        {lapsToDisplay
-          ?.slice(0, 3)
-          .map(({ riderName, bestLap, bike }, index) => {
-            return (
-              <div
-                key={`${riderName}-fast-lap`}
-                className={`fast-lap ${index}`}
-              >
-                {bike && (
-                  <img src={bike.image} alt="" className="rider-image" />
-                )}
-                <div>{riderName}</div>
-                <div>{bestLap}</div>
-              </div>
-            );
-          })}
+        {lapsToDisplay?.slice(0, 3).map(({ name, bestLap, bike }, index) => {
+          return (
+            <div key={`${name}-fast-lap`} className={`fast-lap ${index}`}>
+              {bike && <img src={bike.image} alt="" className="rider-image" />}
+              <div>{name}</div>
+              <div>{bestLap}</div>
+            </div>
+          );
+        })}
       </div>
     </Wrap>
   );

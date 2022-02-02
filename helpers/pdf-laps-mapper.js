@@ -3,7 +3,7 @@ export const pdfLapsMapper = (splicedLaps) => {
 
   return splicedLaps.map((rider) => {
     return {
-      riderName: rider.name,
+      name: rider.name,
       bestLap: rider.min,
       number: rider.number,
       bike: rider.bike,

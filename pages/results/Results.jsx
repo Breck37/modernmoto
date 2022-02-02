@@ -17,7 +17,7 @@ const Results = () => {
 
   const TableHeaderRow = {
     position: "Pos",
-    riderName: "Rider Name",
+    name: "Rider Name",
     team: "Team",
     bestLap: "Best Lap",
     lastLap: "Last Lap",
@@ -56,7 +56,7 @@ const Results = () => {
         <div className="fastest-key">
           <div className="color-sample" />
           <span>Fastest Lap</span>
-          <span className="fast-lap-info">{`${raceResults.liveResults.fastLapLeader.riderName} - ${raceResults.liveResults.fastLapLeader.bestLap}`}</span>
+          <span className="fast-lap-info">{`${raceResults.liveResults.fastLapLeader.name} - ${raceResults.liveResults.fastLapLeader.bestLap}`}</span>
         </div>
         {raceResults && raceResults.liveResults.raceResults.length ? (
           <Table
@@ -70,7 +70,7 @@ const Results = () => {
               .sort((a, b) => a.position - b.position)
               .map((riderResult, row) => {
                 const highlight =
-                  riderResult.riderName ===
+                  riderResult.name ===
                   raceResults.liveResults.fastLapLeader.rider
                     ? manufacturers[
                         raceResults.liveResults.fastLapLeader.bike.toLowerCase()

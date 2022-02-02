@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { MODERN_AQUA, MODERN_DARK } from "./colors";
 
 export default styled.div`
-  margin: 150px 0 0;
   width: 100vw;
   min-height: 100%;
   overflow: hidden;
@@ -11,6 +11,10 @@ export default styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+
+  .qualifying-link {
+    color: ${({ currentMode }) => (currentMode ? MODERN_DARK : MODERN_AQUA)};
+  }
 
   .team-container {
     display: flex;

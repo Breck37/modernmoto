@@ -1,7 +1,7 @@
 const correctKeys = {
   A: "position",
   BL: "bestLap",
-  F: "riderName",
+  F: "name",
   H: "hometown",
   L: "currentLap",
   LL: "lastLap",
@@ -25,7 +25,7 @@ module.exports = (riderArray) =>
       }, {})
     )
     .sort((a, b) => a.position - b.position)
-    .map((r) => ({ ...r, riderName: r.riderName.trim() }));
+    .map((r) => ({ ...r, name: r.name.trim() }));
 
 /// /////// EXAMPLE RESPONSE //////////////////////
 // A: 1 "Position"

@@ -71,6 +71,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
 export default ModernMotoFantasy;
 
 const Container = styled.div`
+  padding-top: 128px;
   @media (min-width: 501px) {
     padding-top: 48px;
   }

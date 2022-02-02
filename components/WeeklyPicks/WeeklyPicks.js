@@ -24,6 +24,7 @@ const WeeklyPicks = ({
         fast: null,
       };
     }
+
     return {
       first: selectedRiders[classType].find((rider) => rider.position === 1),
       second: selectedRiders[classType].find((rider) => rider.position === 2),
@@ -37,10 +38,10 @@ const WeeklyPicks = ({
     };
   }, [selectedRiders]);
 
-  const cleanseSelectedRiders = (riderName, position) => {
+  const cleanseSelectedRiders = (rider, position) => {
     const selectedCopy = { ...selectedRiders };
 
-    if (!riderName) {
+    if (!rider) {
       return {
         selected: {
           ...selectedCopy,
@@ -52,7 +53,13 @@ const WeeklyPicks = ({
       };
     }
 
-    const sanitizedRider = { riderName, position, points: 0 };
+    const sanitizedRider = {
+      ...rider,
+      name: rider.name,
+      position,
+      points: 0,
+    };
+
     if (!selectedRiders[classType]) {
       return {
         selected: selectedCopy,
@@ -61,7 +68,7 @@ const WeeklyPicks = ({
     }
 
     // const alreadySelectedRiderIndex = selectedRiders.find(
-    //   (rider) => rider.riderName === riderName
+    //   (rider) => rider.name === name
     // );
 
     return {
@@ -75,8 +82,13 @@ const WeeklyPicks = ({
     };
   };
 
+  // rider = { name: '', number: '' }
   const handleRiderSelection = (rider, position) => {
-    const { selected, sanitizedRider } = cleanseSelectedRiders(rider, position);
+    const riderToSelect = riders.find((r) => r.name === rider);
+    const { selected, sanitizedRider } = cleanseSelectedRiders(
+      riderToSelect,
+      position
+    );
 
     if (!sanitizedRider) {
       setSelectedRiders(selected);
@@ -96,7 +108,7 @@ const WeeklyPicks = ({
       [classType]: [...selected[classType], sanitizedRider],
     });
   };
-
+  console.log({ riderPositions, selectedRiders, classType });
   return (
     <PicksStyled>
       <RiderSelect
