@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MODERN_AQUA, MODERN_DARK } from "./colors";
 
 export default styled.div`
   width: 100vw;
@@ -12,7 +13,7 @@ export default styled.div`
   color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
 
   .qualifying-link {
-    color: ${({ currentMode }) => (currentMode ? "#282828" : "#fff")};
+    color: ${({ currentMode }) => (currentMode ? MODERN_DARK : MODERN_AQUA)};
   }
 
   .team-container {

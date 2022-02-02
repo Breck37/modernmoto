@@ -2,6 +2,7 @@ import {
   CircularProgress,
   FormControl,
   InputLabel,
+  makeStyles,
   MenuItem,
   Paper,
   Select,
@@ -11,6 +12,7 @@ import {
 import { Alert } from "@material-ui/lab";
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
 import { Button, WeeklyPicks } from "../../components";
 import { QualifyingLink } from "../../components/Team";
 import {
@@ -21,6 +23,23 @@ import {
   useQualifying,
 } from "../../hooks";
 import { TeamStyled } from "../../styles";
+
+const useStyles = makeStyles(() => ({
+  primary: {
+    backgroundColor: "#fff",
+    color: "#454dcc",
+  },
+  secondary: {
+    backgroundColor: "#282828",
+    color: "#fff",
+  },
+  indicatorPrimary: {
+    color: "#282828",
+  },
+  indicatorSecondary: {
+    color: "aqua",
+  },
+}));
 
 const WeeklyPicksController = ({ isActive, children }) => {
   if (!isActive) return null;
@@ -34,6 +53,7 @@ const Team = () => {
   const { currentMode } = useCurrentMode();
   const { user, loading: userLoading } = useAuth();
   const { currentUser } = useCurrentUser(user);
+  const classes = useStyles();
 
   // state
   const [league, setLeague] = useState("");
@@ -180,15 +200,21 @@ const Team = () => {
   console.log({ currentUser });
   return (
     <TeamStyled currentMode={currentMode}>
-      <Paper square>
-        <Tabs
+      <Paper
+        square
+        className={currentMode ? classes.primary : classes.secondary}
+      >
+        <ModernTabs
           onChange={handleTabChange}
           value={currentTab}
-          indicatorColor="primary"
+          currentmode={currentMode}
+          className={
+            currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
+          }
         >
           <Tab label="250" />
           <Tab label="450" />
-        </Tabs>
+        </ModernTabs>
       </Paper>
       <div className="team-container">
         <div className="select-container">
@@ -279,3 +305,9 @@ const Team = () => {
 };
 
 export default Team;
+
+const ModernTabs = styled(Tabs)({
+  "& .MuiTabs-indicator": {
+    backgroundColor: "aqua",
+  },
+});

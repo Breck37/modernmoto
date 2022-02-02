@@ -11,7 +11,6 @@ export default styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   background-color: ${({ currentMode }) => (currentMode ? "#fff" : "#282828")};
