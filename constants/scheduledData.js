@@ -457,7 +457,7 @@ module.exports = {
         city: "Anaheim",
         state: "CA",
         number: "05",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2205/S1ENTRYLIST.PDF",
@@ -489,7 +489,7 @@ module.exports = {
         city: "Oakland",
         state: "CA",
         number: "10",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2210/S1ENTRYLIST.PDF",
@@ -522,7 +522,7 @@ module.exports = {
         city: "San Diego",
         state: "CA",
         number: "15",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2215/S1ENTRYLIST.PDF",
@@ -554,7 +554,7 @@ module.exports = {
         city: "Anaheim",
         state: "CA",
         number: "20",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2220/S1ENTRYLIST.PDF",
@@ -586,7 +586,7 @@ module.exports = {
         city: "Glendale",
         state: "AZ",
         number: "25",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2225/S1ENTRYLIST.PDF",
@@ -618,7 +618,7 @@ module.exports = {
         city: "Anaheim",
         state: "CA",
         number: "30",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2230/S1ENTRYLIST.PDF",
@@ -650,7 +650,7 @@ module.exports = {
         city: "Minneapolis",
         state: "MN",
         number: "35",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2235/S1ENTRYLIST.PDF",
@@ -682,7 +682,7 @@ module.exports = {
         city: "Arlington",
         state: "TX",
         number: "40",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2240/S1ENTRYLIST.PDF",
@@ -714,7 +714,7 @@ module.exports = {
         city: "Daytona",
         state: "FL",
         number: "45",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2245/S1ENTRYLIST.PDF",
@@ -746,7 +746,7 @@ module.exports = {
         city: "Detroit",
         state: "MI",
         number: "50",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2250/S1ENTRYLIST.PDF",
@@ -778,7 +778,7 @@ module.exports = {
         city: "Indianapolis",
         state: "IN",
         number: "55",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2255/S1ENTRYLIST.PDF",
@@ -810,7 +810,7 @@ module.exports = {
         city: "Seattle",
         state: "WA",
         number: "60",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2260/S1ENTRYLIST.PDF",
@@ -841,7 +841,7 @@ module.exports = {
         city: "St. Louis",
         state: "MO",
         number: "65",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2265/S1ENTRYLIST.PDF",
@@ -872,7 +872,7 @@ module.exports = {
         city: "Atlanta",
         state: "GA",
         number: "70",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2270/S1ENTRYLIST.PDF",
@@ -903,7 +903,7 @@ module.exports = {
         city: "Foxborough",
         state: "GA",
         number: "75",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2275/S1ENTRYLIST.PDF",
@@ -934,7 +934,7 @@ module.exports = {
         city: "Denver",
         state: "CO",
         number: "80",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2280/S1ENTRYLIST.PDF",
@@ -965,7 +965,7 @@ module.exports = {
         city: "Salt Lake City",
         state: "UT",
         number: "85",
-        year: "2021",
+        year: "2022",
         season: "S22",
         entryList:
           "https://results.amasupercross.com/xml/sx/events/S2285/S1ENTRYLIST.PDF",
