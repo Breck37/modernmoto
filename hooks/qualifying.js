@@ -11,8 +11,7 @@ export const useQualifying = () => {
     scheduledData[currentRound.type][currentRound.year][currentRound.round];
 
   React.useEffect(() => {
-    console.log("IN EFFECt", { currentRound, entries });
-    if (entries && Object.keys(entries).length) return;
+    if (entries && Object.keys(entries).length && !loading) return;
     axios
       .get(
         `/api/check-entry-list?round=${currentRound.round}&year=${currentRound.year}&type=${currentRound.type}`
@@ -26,7 +25,6 @@ export const useQualifying = () => {
 
   const qualifyingCanBeShown = React.useCallback(async (url) => {
     return await fetch(url, { method: "get" }).then(function (status) {
-      console.log({ url, status });
       return status.ok;
     });
   });

@@ -1,16 +1,16 @@
 const removeUnwantedValues = (lapTime) => {
   return Boolean(
-    !lapTime.includes('-') &&
-      !lapTime.includes('#') &&
-      !(lapTime === 'MAX') &&
-      !(lapTime === 'AVG') &&
-      !(lapTime === 'KAW') &&
-      !(lapTime === 'YAM') &&
-      !(lapTime === 'HON') &&
-      !(lapTime === 'SUZ') &&
-      !(lapTime === 'KTM') &&
-      !(lapTime === 'HUS') &&
-      !(lapTime === 'HQV')
+    !lapTime.includes("-") &&
+      !lapTime.includes("#") &&
+      !(lapTime === "MAX") &&
+      !(lapTime === "AVG") &&
+      !(lapTime === "KAW") &&
+      !(lapTime === "YAM") &&
+      !(lapTime === "HON") &&
+      !(lapTime === "SUZ") &&
+      !(lapTime === "KTM") &&
+      !(lapTime === "HUS") &&
+      !(lapTime === "HQV")
   );
 };
 
@@ -21,7 +21,7 @@ const createRiderResults = (array) => {
   array
     .map((e) => e.trim())
     .reduce((tempRider, lapDetail) => {
-      if (lapDetail === 'MIN') {
+      if (lapDetail === "MIN") {
         riders.push({ ...tempRider });
         rider = [];
         tempRider = {};
@@ -31,15 +31,15 @@ const createRiderResults = (array) => {
         tempRider.name = lapDetail;
         return tempRider;
       }
-      if (lapDetail[1] !== ':') {
-        const mess = lapDetail.split(':');
+      if (lapDetail[1] !== ":") {
+        const mess = lapDetail.split(":");
         const isDoubleDigits = mess.length > 2;
         tempRider[
           `${isDoubleDigits ? `${mess[0]}${mess[1]}` : mess[0]}`
         ] = lapDetail
-          .split('')
+          .split("")
           .splice(isDoubleDigits ? 2 : 1)
-          .join('');
+          .join("");
         return tempRider;
       }
       if (!tempRider.avg) {
@@ -61,8 +61,8 @@ const createRiderResults = (array) => {
     .filter((r) => Boolean(r.min && r.name))
     .map((rider) => {
       return {
-        riderName: rider.name,
-        bestLap: rider.min.replace(/([.:])/g, ''),
+        name: rider.name,
+        bestLap: rider.min.replace(/([.:])/g, ""),
         actualLap: rider.min,
       };
     })

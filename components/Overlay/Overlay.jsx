@@ -1,5 +1,5 @@
-import React from 'react';
-import Icon from '../../icons/Icon';
+import React from "react";
+import Icon from "../../icons/Icon";
 
 const Overlay = ({ showOverlay, currentRider, handleClick }) => {
   if (!showOverlay) return null;
@@ -9,7 +9,7 @@ const Overlay = ({ showOverlay, currentRider, handleClick }) => {
         <Icon name="close" color="#fff" size="32" />
       </div>
       <div className="overlay-content">
-        <div className="rider">{currentRider.riderName}</div>
+        <div className="rider">{currentRider.name}</div>
       </div>
     </div>
   );

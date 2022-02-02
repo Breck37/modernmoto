@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import LeagueCardStyled from './LeagueCardStyled';
+import React, { useMemo } from "react";
+import LeagueCardStyled from "./LeagueCardStyled";
 
 const LeagueCard = ({ leaguePicks = [] }) => {
   const hasLeaguePicks = useMemo(() => {
@@ -31,8 +31,8 @@ const LeagueCard = ({ leaguePicks = [] }) => {
           <div key={pick.user} className="pick">
             <h1>{pick.user}</h1>
             <h2>Total: {pick.totalPoints}</h2>
-            {renderPoints('450', pick.bigBikePoints)}
-            {renderPoints('250', pick.smallBikePoints)}
+            {renderPoints("450", pick.bigBikePoints)}
+            {renderPoints("250", pick.smallBikePoints)}
             {pick.bigBikePicks
               .sort((a, b) => a.position - b.position)
               .map((rider) => {
@@ -41,10 +41,10 @@ const LeagueCard = ({ leaguePicks = [] }) => {
                     <h5>
                       <b>
                         {rider.position === 100
-                          ? 'FL: '
+                          ? "FL: "
                           : `${rider.position}: `}
                       </b>
-                      {rider.riderName}
+                      {rider.name}
                     </h5>
                     <h6>{rider.points}</h6>
                   </div>

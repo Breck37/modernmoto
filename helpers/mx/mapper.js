@@ -12,23 +12,15 @@
 //   POINTS: [],
 // };
 
-const manufacturers = [
-  'SUZ',
-  'HON',
-  'KTM',
-  'YAM',
-  'KAW',
-  'HQV',
-  'GAS',
-];
+const manufacturers = ["SUZ", "HON", "KTM", "YAM", "KAW", "HQV", "GAS"];
 
-const parseRiderName = (name) => {
-  const splitName = name.split(' ');
+const parsename = (name) => {
+  const splitName = name.split(" ");
   let parsedName;
   splitName.map((nameElement) => {
     manufacturers.map((m) => {
-      const reg = new RegExp(m, 'gi');
-      const replacedBike = nameElement.replace(reg, ' ');
+      const reg = new RegExp(m, "gi");
+      const replacedBike = nameElement.replace(reg, " ");
       if (nameElement.length > replacedBike.length) {
         parsedName = replacedBike;
       }
@@ -39,7 +31,7 @@ const parseRiderName = (name) => {
 
 const splitRiderResults = (rider, position) => ({
   number: rider[0],
-  riderName: parseRiderName(rider[1]),
+  name: parsename(rider[1]),
   points: rider[2],
   position,
 });
@@ -52,10 +44,11 @@ const identifyRiderRaceResults = (results) => {
   let finalize = false;
   results
     .filter(
-      (r) => r.length === 1
-        || r.length === 2
-        || r.length === 3
-        || !/^\d+$/.test(r.split('X').join('')),
+      (r) =>
+        r.length === 1 ||
+        r.length === 2 ||
+        r.length === 3 ||
+        !/^\d+$/.test(r.split("X").join(""))
     )
     .map((c, i, arr) => {
       if (riderResults.length >= 40) {
@@ -74,18 +67,18 @@ const identifyRiderRaceResults = (results) => {
         currentPosition += 1;
       }
       if (currentRider.length == 3) {
-        currentRider.push(i + 4)
+        currentRider.push(i + 4);
         return;
       } else if (currentRider[3]) {
         return;
       } else if (i === arr.length - 1) {
         riderResults.push(
-          splitRiderResults([...currentRider, c], currentPosition),
+          splitRiderResults([...currentRider, c], currentPosition)
         );
         currentRider = [];
         return;
       }
-      if (c.length > 3 && c.length < 20 && !c.includes(' ')) {
+      if (c.length > 3 && c.length < 20 && !c.includes(" ")) {
         x = true;
         currentRider.push((c += arr[i + 1]));
         return;
@@ -94,7 +87,11 @@ const identifyRiderRaceResults = (results) => {
       currentRider.push(c);
     });
 
-  return riderResults.filter(rider => (rider.points !== '0' && !isNaN(rider.points)) || (Number(rider.points) !== 0 && !isNaN(rider.points)));
+  return riderResults.filter(
+    (rider) =>
+      (rider.points !== "0" && !isNaN(rider.points)) ||
+      (Number(rider.points) !== 0 && !isNaN(rider.points))
+  );
 };
 
 module.exports = (resultString) => identifyRiderRaceResults(resultString);

@@ -8,12 +8,12 @@ export const mockUserWithPicks = {
   picks: [
     {
       bigBikePicks: [
-        { riderName: "Ken Roczen", position: 2, points: 10 },
-        { riderName: "Cooper Webb", position: 3, points: 5 },
-        { riderName: "Chase Sexton", position: 4, points: 0 },
-        { riderName: "Malcolm Stewart", position: 5, points: 0 },
-        { riderName: "Broc Tickle", position: 10, points: 0 },
-        { riderName: "Eli Tomac", position: 100, points: 20 },
+        { name: "Ken Roczen", position: 2, points: 10 },
+        { name: "Cooper Webb", position: 3, points: 5 },
+        { name: "Chase Sexton", position: 4, points: 0 },
+        { name: "Malcolm Stewart", position: 5, points: 0 },
+        { name: "Broc Tickle", position: 10, points: 0 },
+        { name: "Eli Tomac", position: 100, points: 20 },
       ],
       hasBeenEquated: true,
       league: "League of Extraordinary Bros",
@@ -25,12 +25,12 @@ export const mockUserWithPicks = {
     },
     {
       bigBikePicks: [
-        { riderName: "Ken Roczen", position: 2, points: 10 },
-        { riderName: "Cooper Webb", position: 3, points: 5 },
-        { riderName: "Chase Sexton", position: 4, points: 0 },
-        { riderName: "Malcolm Stewart", position: 5, points: 0 },
-        { riderName: "Broc Tickle", position: 10, points: 0 },
-        { riderName: "Eli Tomac", position: 100, points: 20 },
+        { name: "Ken Roczen", position: 2, points: 10 },
+        { name: "Cooper Webb", position: 3, points: 5 },
+        { name: "Chase Sexton", position: 4, points: 0 },
+        { name: "Malcolm Stewart", position: 5, points: 0 },
+        { name: "Broc Tickle", position: 10, points: 0 },
+        { name: "Eli Tomac", position: 100, points: 20 },
       ],
       hasBeenEquated: true,
       league: "League of Extraordinary Bros",

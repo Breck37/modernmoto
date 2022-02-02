@@ -10,19 +10,17 @@ import {
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import axios from "axios";
-import Link from "next/link";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, WeeklyPicks } from "../../components";
+import { QualifyingLink } from "../../components/Team";
 import {
   useAuth,
   useCurrentMode,
   useCurrentRound,
   useCurrentUser,
-  useIsMountedRef,
+  useQualifying,
 } from "../../hooks";
 import { TeamStyled } from "../../styles";
-
-// TODO create league select
 
 const WeeklyPicksController = ({ isActive, children }) => {
   if (!isActive) return null;
@@ -32,7 +30,6 @@ const WeeklyPicksController = ({ isActive, children }) => {
 
 const Team = () => {
   // hooks
-  const isMounted = useIsMountedRef();
   const currentRound = useCurrentRound();
   const { currentMode } = useCurrentMode();
   const { user, loading: userLoading } = useAuth();
@@ -41,97 +38,63 @@ const Team = () => {
   // state
   const [league, setLeague] = useState("");
   const [selectedRiders, setSelectedRiders] = useState();
-  const [entries, setEntries] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [canShowQualifying, setCanShowQualifying] = useState(false);
   const [success, setSuccess] = useState("");
+
+  const { entries, loading, canShowQualifying } = useQualifying();
 
   useEffect(() => {
     if (success) {
       setTimeout(() => setSuccess(""), 1500);
     }
-    if (!isMounted.current) return;
-    if (entries && Object.keys(entries).length) return;
+  }, [success]);
 
-    axios
-      .get(
-        `/api/check-entry-list?round=${currentRound.round}&year=${currentRound.year}&type=${currentRound.type}`
-      )
-      .then((res) => {
-        setLoading(false);
-        setEntries(res.data.riders);
-      })
-      .catch((err) => console.warn("ENTRY ERROR", err));
-  }, [success, entries]);
+  useEffect(() => {
+    if (!currentUser || !currentUser.currentRound) return;
+    if (selectedRiders) return;
 
-  const qualifyingCanBeShown = useCallback(async (url) => {
-    return await fetch(url, { method: "get" }).then(function (status) {
-      return status.ok;
+    setSelectedRiders({
+      big: currentUser.currentRound.bigBikePicks,
+      small: currentUser.currentRound.smallBikePicks,
     });
   });
 
-  useEffect(async () => {
-    if (!canShowQualifying && loading && currentRound) {
-      try {
-        const result = await qualifyingCanBeShown(
-          currentRound.bigBikeQualifying
-        );
-        if (result) {
-          setCanShowQualifying(true);
-        }
-
-        setLoading(false);
-      } catch (e) {
-        console.log("Error getting qualifying results", e);
-      }
-    }
-  }, [canShowQualifying, loading, currentRound]);
-  const selectedBigBikeRiders = useMemo(() => {
-    if (!selectedRiders || !selectedRiders.big) return null;
-    const riderNames = [];
-    return selectedRiders.big
+  const validateSelectedRiders = (size) => {
+    if (!selectedRiders || !selectedRiders[size]) return null;
+    const names = [];
+    return selectedRiders[size]
       .map((rider) => {
-        const indexOfRiderName = riderNames.indexOf(rider.riderName);
+        const riderIndex = names.findIndex((name) => {
+          return rider.name === name;
+        });
+        console.log({ selectedRiders, riderIndex, rider, names });
+
         if (
           rider.position === 100 ||
           rider.position === 101 ||
           rider.position === 102 ||
-          indexOfRiderName === -1
+          riderIndex === -1
         ) {
-          riderNames.push(rider.riderName);
+          names.push(rider.name);
           return { ...rider, error: "" };
         }
-        return {
-          ...rider,
-          error: `Please change pick #${indexOfRiderName + 1}`,
-        };
-      })
-      .sort((a, b) => a.position - b.position);
-  }, [selectedRiders]);
 
-  const selectedSmallBikeRiders = useMemo(() => {
-    if (!selectedRiders || !selectedRiders.small) return null;
-    const riderNames = [];
-    return selectedRiders.small
-      .map((rider) => {
-        const indexOfRiderName = riderNames.indexOf(rider.riderName);
-        if (
-          rider.position === 100 ||
-          rider.position === 101 ||
-          rider.position === 102 ||
-          indexOfRiderName === -1
-        ) {
-          riderNames.push(rider.riderName);
-          return { ...rider, error: "" };
-        }
         return {
           ...rider,
-          error: `Please change pick #${indexOfRiderName + 1}`,
+          error: `Please change pick #${riderIndex + 1}`,
         };
       })
       .sort((a, b) => a.position - b.position);
-  }, [selectedRiders]);
+  };
+
+  const selectedBigBikeRiders = React.useMemo(
+    () => validateSelectedRiders("big"),
+    []
+  );
+  const selectedSmallBikeRiders = React.useMemo(
+    () => validateSelectedRiders("small"),
+    [selectedRiders?.small]
+  );
 
   const isDisabled = useMemo(() => {
     const classTeamIsSet = currentRound.type === "sx" ? 7 : 8;
@@ -168,6 +131,7 @@ const Team = () => {
     if (!riders?.length) return [];
     return riders.map(({ error, ...rest }) => ({ ...rest }));
   };
+
   const saveUserPicks = () => {
     const cleansedBigBikeSelectedRiders = removeErrors(selectedRiders.big);
     const cleansedSmallBikeSelectedRiders = removeErrors(selectedRiders.small);
@@ -182,6 +146,7 @@ const Team = () => {
       league: league || "League of Extraordinary Bros",
       type: currentRound.type,
       deadline: currentRound.deadline,
+      rank: null,
     });
 
     axios
@@ -201,7 +166,7 @@ const Team = () => {
     setCurrentTab(newValue);
   };
 
-  if (loading || userLoading) {
+  if (loading || userLoading || !currentUser?.leagues) {
     return <CircularProgress />;
   }
 
@@ -212,7 +177,7 @@ const Team = () => {
   //     </div>
   //   </TeamStyled>
   // );
-
+  console.log({ currentUser });
   return (
     <TeamStyled currentMode={currentMode}>
       <Paper square>
@@ -248,7 +213,7 @@ const Team = () => {
                     return (
                       <MenuItem
                         key={leagueToPick}
-                        // style={getStyles(leagueToPick, riderName, theme)}
+                        // style={getStyles(leagueToPick, name, theme)}
                         value={leagueToPick}
                         className="roboto"
                         disabled={league === leagueToPick}
@@ -280,15 +245,11 @@ const Team = () => {
           ) : (
             <div>Loading Leagues...</div>
           )}
-          {canShowQualifying ? (
-            <Link href={qualifyingContent.link} passHref>
-              <a href="" target="_blank">
-                <h3>{qualifyingContent.label}</h3>
-              </a>
-            </Link>
-          ) : (
-            <h3>{qualifyingContent.label}</h3>
-          )}
+
+          <QualifyingLink
+            canShowQualifying={canShowQualifying}
+            qualifyingContent={qualifyingContent}
+          />
         </div>
         <WeeklyPicksController isActive={currentTab == 0}>
           <WeeklyPicks
