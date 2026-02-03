@@ -5,6 +5,6 @@ export default function useIsMountedRef() {
   useEffect(() => {
     isMountedRef.current = true;
     return () => (isMountedRef.current = false);
-  });
+  }, []);
   return isMountedRef;
 }

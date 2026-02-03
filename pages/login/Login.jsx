@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import axios from 'axios';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useCurrentMode, useCurrentUser } from '../../hooks';
 import { LoginStyled } from '../../styles';
 import ModernMotoLogo from '../../svgs/ModernMotoFlat.svg';

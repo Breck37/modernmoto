@@ -2,14 +2,13 @@ import {
   CircularProgress,
   FormControl,
   InputLabel,
-  makeStyles,
   MenuItem,
   Paper,
   Select,
   Tab,
   Tabs,
-} from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+  Alert,
+} from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
@@ -24,7 +23,7 @@ import {
 } from "../../hooks";
 import { TeamStyled } from "../../styles";
 
-const useStyles = makeStyles(() => ({
+const paperStyles = {
   primary: {
     backgroundColor: "#fff",
     color: "#454dcc",
@@ -33,13 +32,16 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#282828",
     color: "#fff",
   },
-  indicatorPrimary: {
+};
+
+const indicatorStyles = {
+  primary: {
     color: "#282828",
   },
-  indicatorSecondary: {
+  secondary: {
     color: "aqua",
   },
-}));
+};
 
 const WeeklyPicksController = ({ isActive, children }) => {
   if (!isActive) return null;
@@ -53,7 +55,6 @@ const Team = () => {
   const { currentMode } = useCurrentMode();
   const { user, loading: userLoading } = useAuth();
   const { currentUser } = useCurrentUser(user);
-  const classes = useStyles();
 
   // state
   const [league, setLeague] = useState("");
@@ -77,7 +78,7 @@ const Team = () => {
       big: currentUser.currentRound.bigBikePicks,
       small: currentUser.currentRound.smallBikePicks,
     });
-  });
+  }, [currentUser, selectedRiders]);
 
   const validateSelectedRiders = (size) => {
     if (!selectedRiders || !selectedRiders[size]) return null;
@@ -202,15 +203,13 @@ const Team = () => {
     <TeamStyled currentMode={currentMode}>
       <Paper
         square
-        className={currentMode ? classes.primary : classes.secondary}
+        sx={currentMode ? paperStyles.primary : paperStyles.secondary}
       >
         <ModernTabs
           onChange={handleTabChange}
           value={currentTab}
           currentmode={currentMode}
-          className={
-            currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
-          }
+          sx={currentMode ? indicatorStyles.primary : indicatorStyles.secondary}
         >
           <Tab label="250" />
           <Tab label="450" />

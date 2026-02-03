@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 import {
   Select,
   InputLabel,
   MenuItem,
   FormControl,
   FormHelperText,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: "100%",
-    maxWidth: "100%",
-  },
-}));
+} from "@mui/material";
 
 function getStyles(name, personName, theme) {
   if (!name || !personName) {
@@ -39,7 +31,6 @@ const RiderSelect = ({
   value,
 }) => {
   const [name, setname] = useState("");
-  const classes = useStyles();
   const theme = useTheme();
 
   useEffect(() => {
@@ -64,7 +55,7 @@ const RiderSelect = ({
   };
 
   return (
-    <FormControl className={classes.formControl} error={value?.error}>
+    <FormControl sx={{ m: 1, minWidth: "100%", maxWidth: "100%" }} error={value?.error}>
       <InputLabel id={selectLabel}>{selectLabel}</InputLabel>
       <Select
         labelId={selectLabel}

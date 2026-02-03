@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonStyled from "./ButtonStyled";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 /**
  * Custom Button component

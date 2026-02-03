@@ -1,4 +1,4 @@
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
@@ -10,7 +10,7 @@ const Contact = ({ user, loading: isLoading }) => {
       router.push('/login');
       return;
     }
-  });
+  }, [isLoading, user, router]);
 
   if (isLoading) {
     return <CircularProgress />;
