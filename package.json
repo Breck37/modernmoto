@@ -34,7 +34,7 @@
     "magic-sdk": "^4.3.0",
     "migrate-mongo": "^8.2.2",
     "minimist": "^1.2.6",
-    "next": "15",
+    "next": "16",
     "pino": "^6.11.3",
     "react": "19",
     "react-dom": "19",
