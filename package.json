@@ -27,7 +27,7 @@
     "file-loader": "^6.2.0",
     "fontsource-roboto": "^4.0.0",
     "http-proxy-middleware": "^2.0.1",
-    "immer": "^9.0.6",
+    "immer": "^9.0.7",
     "magic-sdk": "^4.3.0",
     "migrate-mongo": "^8.2.2",
     "minimist": "^1.2.6",
