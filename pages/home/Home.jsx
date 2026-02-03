@@ -1,4 +1,4 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";

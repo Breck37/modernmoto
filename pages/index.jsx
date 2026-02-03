@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useCurrentMode } from '../hooks/currentMode';
 import { IndexStyled } from '../styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 ///// EXAMPLES ////
 /// NEED TO LOOK AT https://live.amasupercross.com/xml/sx/RaceData.json WHILE RACE IS HAPPENING

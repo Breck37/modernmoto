@@ -1,4 +1,4 @@
-import { CircularProgress, Table } from "@material-ui/core";
+import { CircularProgress, Table } from "@mui/material";
 import React, { useState } from "react";
 import { RiderRow } from "../../components/RiderRow";
 import { manufacturers } from "../../constants";

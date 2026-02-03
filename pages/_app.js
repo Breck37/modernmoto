@@ -22,7 +22,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
   }, [router.pathname]);
 
   useEffect(() => {
-    if ((!user || !user.email) && !loading) null;
+    if ((!user || !user.email) && !loading) return;
 
     const mode = localStorage.getItem("USER_CURRENT_MODE");
 
@@ -32,7 +32,7 @@ function ModernMotoFantasy({ Component, pageProps }) {
     } else {
       setCurrentMode(parseInt(localStorage.getItem("USER_CURRENT_MODE")));
     }
-  });
+  }, [user, loading]);
 
   const handleCurrentModeUpdate = () => {
     const currentMode = localStorage.getItem("USER_CURRENT_MODE");

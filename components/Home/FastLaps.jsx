@@ -1,10 +1,9 @@
-import { Paper, Tab, Tabs } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Paper, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCurrentMode } from "../../hooks";
 
-const useStyles = makeStyles(() => ({
+const paperStyles = {
   primary: {
     backgroundColor: "#fff",
     color: "#454dcc",
@@ -13,18 +12,20 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#282828",
     color: "#fff",
   },
-  indicatorPrimary: {
+};
+
+const indicatorStyles = {
+  primary: {
     color: "#282828",
   },
-  indicatorSecondary: {
+  secondary: {
     color: "aqua",
   },
-}));
+};
 
 export const FastLaps = ({ liveResults }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const { currentMode } = useCurrentMode();
-  const classes = useStyles();
   //const apiRequests =
   // scheduledData[currentRound.type][currentRound.year][currentRound.round];
 
@@ -38,7 +39,6 @@ export const FastLaps = ({ liveResults }) => {
       handleTabChange={handleTabChange}
       currentTab={currentTab}
       currentMode={currentMode}
-      classes={classes}
     />
   );
 };
@@ -48,7 +48,6 @@ const Presentation = ({
   handleTabChange,
   currentTab,
   currentMode,
-  classes,
 }) => {
   const lapsToDisplay = currentTab ? liveResults?.big : liveResults?.small;
 
@@ -56,15 +55,13 @@ const Presentation = ({
     <Wrap>
       <Paper
         square
-        className={currentMode ? classes.primary : classes.secondary}
+        sx={currentMode ? paperStyles.primary : paperStyles.secondary}
       >
         <ModernTabs
           onChange={handleTabChange}
           value={currentTab}
           currentmode={currentMode}
-          className={
-            currentMode ? classes.indicatorPrimary : classes.indicatorSecondary
-          }
+          sx={currentMode ? indicatorStyles.primary : indicatorStyles.secondary}
         >
           <Tab label="250" />
           <Tab label="450" />
