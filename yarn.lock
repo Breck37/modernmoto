@@ -3702,9 +3702,9 @@ immer@^8.0.1:
   integrity sha512-jMfL18P+/6P6epANRvRk6q8t+3gGhqsJ9EuJ25AXE+9bNTYtssvzeYbEd0mXRYWCmmXSIbnlpz6vd6iJlmGGGQ==
 
 immer@^9.0.8:
-  version "9.0.8"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.8.tgz#d0f28b29745c42140f8598493c38a68da9936b69"
-  integrity sha512-rrMYWRLka5EU9EA8mKweXX37vumW7pe3oIfY4TafuV6t8EfxpFU9tNP6gsc3cxKC+mS/Zn5vguyM+bsxIynbJQ==
+  version "9.0.21"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.21.tgz#1e025ea31a40f24fb064f1fef23e931496330176"
+  integrity sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==
 
 import-fresh@^3.0.0, import-fresh@^3.2.1:
   version "3.3.0"
