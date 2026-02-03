@@ -23,7 +23,7 @@
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.30.2",
     "babel-plugin-styled-components": "^2.1.4",
-    "cookie": "^0.4.1",
+    "cookie": "^0.7.0",
     "crawler-request": "^1.2.2",
     "eslint-plugin-react": "^7.24.0",
     "express-pino-logger": "^6.0.0",
