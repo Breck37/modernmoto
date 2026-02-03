@@ -26,7 +26,7 @@
     "express-pino-logger": "^6.0.0",
     "file-loader": "^6.2.0",
     "fontsource-roboto": "^4.0.0",
-    "http-proxy-middleware": "^2.0.1",
+    "http-proxy-middleware": "^2.0.9",
     "immer": "^9.0.8",
     "magic-sdk": "^4.3.0",
     "migrate-mongo": "^8.2.2",
