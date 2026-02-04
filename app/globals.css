@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Default theme variables (dark mode) - will be overridden by JS */
+:root {
+  --color-background: #0a0a0f;
+  --color-background-secondary: #12121a;
+  --color-text: #ffffff;
+  --color-text-muted: #9ca3af;
+  --color-text-subtle: #4b5563;
+  --color-accent: #454dcc;
+  --color-accent-light: #6366f1;
+  --color-accent-glow: rgba(69, 77, 204, 0.4);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input-bg: rgba(255, 255, 255, 0.05);
+  --color-gradient-orb-1: rgba(69, 77, 204, 0.2);
+  --color-gradient-orb-2: rgba(147, 51, 234, 0.15);
+}
+
+/* Smooth animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes breathe-out {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes breathe-in {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes phrase-cycle-1 {
+  0%, 30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33%, 97% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes phrase-cycle-2 {
+  0%, 30% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  33%, 63% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  66%, 100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes phrase-cycle-3 {
+  0%, 63% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  66%, 97% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes line-draw {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fade-in-up 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fade-in-up 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-3 {
+  animation: fade-in-up 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: line-draw 2s ease-out forwards;
+}
+
+.animate-breathe-out {
+  animation: breathe-out 4s ease-in-out infinite;
+}
+
+.animate-breathe-in {
+  animation: breathe-in 4s ease-in-out infinite;
+}
+
+.animate-phrase-1 {
+  animation: phrase-cycle-1 9s ease-in-out infinite;
+}
+
+.animate-phrase-2 {
+  animation: phrase-cycle-2 9s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-phrase-3 {
+  animation: phrase-cycle-3 9s ease-in-out infinite;
+  opacity: 0;
+}
