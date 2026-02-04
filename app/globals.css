@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Semantic color tokens that reference CSS variables */
+  --color-background: var(--bg);
+  --color-background-secondary: var(--bg-secondary);
+  --color-foreground: var(--fg);
+  --color-foreground-muted: var(--fg-muted);
+  --color-foreground-subtle: var(--fg-subtle);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-glow: var(--primary-glow);
+  --color-border: var(--border);
+  --color-input: var(--input-bg);
+  --color-orb-1: var(--orb-1);
+  --color-orb-2: var(--orb-2);
+}
+
+/* Light mode (default) */
+:root {
+  --bg: #f8fafc;
+  --bg-secondary: #ffffff;
+  --fg: #454dcc;
+  --fg-muted: #64748b;
+  --fg-subtle: #94a3b8;
+  --primary: #12121a;
+  --primary-light: #6366f1;
+  --primary-glow: rgba(69, 77, 204, 0.3);
+  --border: rgba(0, 0, 0, 0.1);
+  --input-bg: rgba(0, 0, 0, 0.03);
+  --orb-1: rgba(69, 77, 204, 0.15);
+  --orb-2: rgba(147, 51, 234, 0.1);
+}
+
+/* Dark mode */
+.dark {
+  --bg: #0a0a0f;
+  --bg-secondary: #12121a;
+  --fg: #ffffff;
+  --fg-muted: #9ca3af;
+  --fg-subtle: #4b5563;
+  --primary: #454dcc;
+  --primary-light: #6366f1;
+  --primary-glow: rgba(69, 77, 204, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --orb-1: rgba(69, 77, 204, 0.2);
+  --orb-2: rgba(147, 51, 234, 0.15);
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes breathe-out {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes breathe-in {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* 5 phrases, each visible for ~17% with 3% transitions */
+@keyframes phrase-cycle-1 {
+  0%, 17% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  20%, 97% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes phrase-cycle-2 {
+  0%, 17% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  20%, 37% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  40%, 100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes phrase-cycle-3 {
+  0%, 37% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  40%, 57% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  60%, 100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes phrase-cycle-4 {
+  0%, 57% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  60%, 77% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80%, 100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes phrase-cycle-5 {
+  0%, 77% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  80%, 97% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes line-draw {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fade-in-up 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fade-in-up 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-up-delay-3 {
+  animation: fade-in-up 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-breathe-out {
+  animation: breathe-out 4s ease-in-out infinite;
+}
+
+.animate-breathe-in {
+  animation: breathe-in 4s ease-in-out infinite;
+}
+
+.animate-phrase-1 {
+  animation: phrase-cycle-1 15s ease-in-out infinite;
+}
+
+.animate-phrase-2 {
+  animation: phrase-cycle-2 15s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-phrase-3 {
+  animation: phrase-cycle-3 15s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-phrase-4 {
+  animation: phrase-cycle-4 15s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-phrase-5 {
+  animation: phrase-cycle-5 15s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animate-line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: line-draw 2s ease-out forwards;
+}
