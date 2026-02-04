@@ -3,7 +3,6 @@
   "version": "1.1.2",
   "private": true,
   "main": "server.js",
-  "proxy": "http://localhost:3700",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -21,43 +20,30 @@
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@svgr/webpack": "^5.5.0",
-    "axios": "^0.30.2",
+    "axios": "^1.7.9",
     "babel-plugin-styled-components": "^2.1.4",
     "cookie": "^0.7.0",
     "crawler-request": "^1.2.2",
     "eslint-plugin-react": "^7.24.0",
-    "express-pino-logger": "^6.0.0",
     "file-loader": "^6.2.0",
-    "fontsource-roboto": "^4.0.0",
-    "http-proxy-middleware": "^2.0.9",
-    "immer": "^9.0.8",
     "magic-sdk": "^4.3.0",
-    "migrate-mongo": "^8.2.2",
-    "minimist": "^1.2.6",
     "next": "15",
-    "pino": "^6.11.3",
     "react": "19",
     "react-dom": "19",
-    "socket.io": "^4.6.2",
     "styled-components": "^6.3.8",
-    "swr": "^0.5.6",
-    "xml2js": "^0.4.23"
+    "swr": "^2.2.5",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
-    "add": "^2.0.6",
-    "animejs": "^3.2.1",
     "babel-loader": "^8.1.0",
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-next": "^11.0.1",
     "eslint-plugin-import": "^2.23.4",
-    "pino-pretty": "^5.1.0",
     "yarn": "^1.22.10"
   },
   "resolutions": {
-    "immer": "^8.0.1",
-    "minimist": "^1.2.5",
     "ssri": "^8.0.1"
   }
 }
