@@ -8,13 +8,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 p-3 rounded-full bg-[--color-background-secondary] border border-[--color-border] shadow-md hover:shadow-lg transition-all duration-300 group z-50"
+      className="fixed top-6 right-6 p-3 rounded-full bg-background-secondary border border-border shadow-md hover:shadow-lg transition-all duration-300 group z-50"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (
-        <SunIcon className="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" />
+        <SunIcon className="w-5 h-5 text-foreground-muted group-hover:text-primary transition-colors" />
       ) : (
-        <MoonIcon className="w-5 h-5 text-[--color-text-muted] group-hover:text-[--color-accent] transition-colors" />
+        <MoonIcon className="w-5 h-5 text-foreground-muted group-hover:text-primary transition-colors" />
       )}
     </button>
   );
