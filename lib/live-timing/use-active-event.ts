@@ -3,10 +3,10 @@
 import { useEffect } from 'react';
 import { useActiveEventContext } from './active-event-context';
 
-// Hardcoded known event ID from Houston 2026-01-31 (event 1163).
+// Hardcoded known event ID (detected via XHR interception on supercrosslive.com).
 // TODO: Replace with real active-event detection (e.g., API call to check
 // which event is currently live). For now this simulates finding an active event.
-const KNOWN_EVENT_ID = 1163;
+const KNOWN_EVENT_ID = 7478;
 
 const POLL_INTERVAL_MS = 60 * 60 * 1000; // 60 minutes
 

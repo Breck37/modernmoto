@@ -155,7 +155,7 @@ describe('ActiveEventContext', () => {
         wrapper: ActiveEventProvider,
       });
 
-      expect(result.current).toBe(1163);
+      expect(result.current).toBe(7478);
       unmount();
     });
 
@@ -164,13 +164,13 @@ describe('ActiveEventContext', () => {
         wrapper: ActiveEventProvider,
       });
 
-      expect(result.current).toBe(1163);
+      expect(result.current).toBe(7478);
 
       act(() => {
         vi.advanceTimersByTime(60 * 60 * 1000);
       });
 
-      expect(result.current).toBe(1163);
+      expect(result.current).toBe(7478);
       unmount();
     });
 
