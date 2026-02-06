@@ -144,6 +144,17 @@ export interface RawRaceData {
 }
 
 // ---------------------------------------------------------------------------
+// Combined raw timing data (input to normalizer)
+// ---------------------------------------------------------------------------
+
+export interface RawTimingData {
+  readonly riders: RawRidersData | null;
+  readonly clock: RawClockData | null;
+  readonly weather: RawWeatherData | null;
+  readonly race: RawRaceData | null;
+}
+
+// ---------------------------------------------------------------------------
 // Normalized domain model interfaces
 // ---------------------------------------------------------------------------
 

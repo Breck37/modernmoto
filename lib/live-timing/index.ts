@@ -9,6 +9,7 @@ export type {
   RawSegmentName,
   RawSeriesEntry,
   RawRaceData,
+  RawTimingData,
 
   // Normalized domain models
   SectorTiming,
@@ -21,3 +22,5 @@ export type {
   RaceEventType,
   RaceEvent,
 } from './types';
+
+export { normalize } from './normalizer';
