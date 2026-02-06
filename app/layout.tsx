@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ActiveEventProvider } from "@/lib/live-timing/active-event-context";
 import { ThemeProvider } from "./components/theme-provider";
 import "./globals.css";
 
@@ -24,7 +25,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <ThemeProvider>
-          {children}
+          <ActiveEventProvider>
+            {children}
+          </ActiveEventProvider>
         </ThemeProvider>
       </body>
     </html>

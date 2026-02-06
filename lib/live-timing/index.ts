@@ -24,3 +24,6 @@ export type {
 } from './types';
 
 export { normalize } from './normalizer';
+
+export { ActiveEventProvider, useActiveEventContext } from './active-event-context';
+export { useActiveEvent } from './use-active-event';

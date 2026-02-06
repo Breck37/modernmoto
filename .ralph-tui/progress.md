@@ -5,7 +5,8 @@
 - **Package manager**: pnpm (v10.28.2)
 - **Type-only exports**: Use `export type { ... }` in barrel files for type-only modules
 - **Readonly convention**: Use `readonly` on all interface properties and `readonly T[]` for arrays in domain models to prevent mutation
-- **Test runner**: vitest v4 configured via `vitest.config.ts` with `@` path alias; run tests with `npx vitest run`
+- **Test runner**: vitest v4 configured via `vitest.config.ts` with `@` path alias and `esbuild: { jsx: 'automatic' }` for React JSX; run tests with `npx vitest run`
+- **React component/hook tests**: Use `@vitest-environment jsdom` directive and a lightweight custom `renderHook` helper (no `@testing-library/react` dependency); jsdom is installed as a dev dependency
 - **Defensive normalization**: Use `??` defaults for all raw fields to handle missing/malformed data; use `Array.isArray()` guards for array fields
 
 ---
@@ -39,4 +40,23 @@
   - Using `??` (nullish coalescing) instead of `||` is important: raw numeric fields like `0` are valid values that `||` would incorrectly replace with defaults
   - `Array.isArray()` guard is needed on array fields (LatestSectors, SectorNames, Series) since raw data may have `undefined` from malformed JSON
   - Riders are sorted by Position ascending using `.slice().sort()` to avoid mutating the mapped array
+---
+
+## 2026-02-06 - US-006
+- Implemented ActiveEvent context and detection hook for automatic event detection
+- Files created:
+  - `lib/live-timing/active-event-context.tsx` — React Context providing `activeEventId: number | null` and `setActiveEventId`, plus `ActiveEventProvider` wrapper and `useActiveEventContext` hook
+  - `lib/live-timing/use-active-event.ts` — `useActiveEvent()` hook that sets the active event on mount and polls every 60 minutes; currently hardcoded to event 1163 (Houston) with TODO for real detection
+  - `lib/live-timing/active-event-context.test.tsx` — 7 tests covering context throw-outside-provider, default null state, set/clear event ID, hook mount behavior, interval polling, and cleanup
+- Files modified:
+  - `app/layout.tsx` — Added `ActiveEventProvider` wrapping children inside `ThemeProvider`
+  - `lib/live-timing/index.ts` — Added exports for `ActiveEventProvider`, `useActiveEventContext`, and `useActiveEvent`
+  - `vitest.config.ts` — Added `esbuild: { jsx: 'automatic' }` for React JSX support in tests
+  - `package.json` / `pnpm-lock.yaml` — Added jsdom dev dependency for React component tests
+- **Learnings:**
+  - vitest with `jsx: "preserve"` (from tsconfig) needs `esbuild: { jsx: 'automatic' }` in vitest.config.ts to handle JSX without explicit `import React` in every file
+  - jsdom is required as a separate dev dependency for React DOM tests — vitest doesn't bundle it
+  - React 19 + jsdom emits "not configured to support act(...)" warnings — these are harmless and tests work correctly despite them
+  - No PAST_EVENTS.md or INIT.md exists in the repo; used event 1163 (Houston) from the comment in `types.ts` as the hardcoded event ID
+  - `useCallback` on `setActiveEventId` in the provider prevents unnecessary re-renders of consumers and stabilizes the `useEffect` dependency in `useActiveEvent`
 ---
